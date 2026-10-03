@@ -115,7 +115,11 @@ Prix, concentrations, descriptions, pyramides, familles olfactives, `[Notes prin
 
 ## 9. Historique Git
 
-Dépôt **local uniquement** (aucun dépôt distant configuré). Un commit par étape terminée :
+Sauvegardé sur GitHub (dépôt **privé**) : https://github.com/deniroduvvt/frag-emirates-theme — branche `main`.
+Les nouveaux commits restent locaux jusqu'à `git push` (fait par l'utilisateur ; Claude ne pousse pas sans accord).
+Ne pas confondre avec `shopify theme push`, interdit par CLAUDE.md.
+
+Un commit par étape terminée :
 
 ```
 8db70bc Thème Skeleton initial
