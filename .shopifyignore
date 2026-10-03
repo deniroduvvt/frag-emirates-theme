@@ -17,3 +17,6 @@ _design/**
 
 # Claude Code instructions - local only
 CLAUDE.md
+
+# Seed scripts for dev store test data (Admin API) - local only
+_seed/**
