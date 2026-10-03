@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Frag Emirates — Nos parfums</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&amp;family=Jost:wght@300;400;500&amp;display=swap">
+<style>
+body{margin:0;background:#faf5e8;font-family:"Jost","Futura","Avenir Next",system-ui,sans-serif;color:#4e2610}
+a{color:#4e2610}a:hover{color:#3a1c0b}
+.fe-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.fe-btn:hover{background:#3a1c0b}
+.fe-btn-sand:hover{background:#f2e3b8}
+.fe-ghost:hover{background:#f3ead0}
+.fe-tool:hover{background:#f3ead0}
+.fe-sortopt:hover{background:#f3ead0}
+.fe-nav{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:2px;text-underline-offset:8px}
+.fe-nav:hover{text-decoration-color:#ead7a0}
+.fe-foot a:hover{text-decoration:underline;text-decoration-color:#ead7a0;text-decoration-thickness:2px;text-underline-offset:4px}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:none;box-shadow:0 0 0 2px #faf5e8,0 0 0 4px #4e2610}
+.fe-deep a:focus-visible,.fe-deep button:focus-visible{box-shadow:0 0 0 2px #2b1508,0 0 0 4px #ead7a0}
+input::placeholder{color:#735340}
+input[type=checkbox]{accent-color:#4e2610;width:20px;height:20px;margin:0}
+.fe-opt{display:flex;align-items:center;gap:16px;min-height:40px;font-size:14px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer}
+details summary{list-style:none;cursor:pointer}
+details summary::-webkit-details-marker{display:none}
+details[open] .fe-chev{transform:rotate(180deg)}
+.fe-range{position:absolute;left:0;top:0;width:100%;height:24px;margin:0;background:none;pointer-events:none;-webkit-appearance:none;appearance:none}
+.fe-range::-webkit-slider-runnable-track{background:transparent;height:24px}
+.fe-range::-webkit-slider-thumb{-webkit-appearance:none;pointer-events:auto;width:22px;height:22px;margin-top:1px;border-radius:50%;background:#fffdf6;border:2px solid #4e2610;box-sizing:border-box;cursor:pointer}
+.fe-range::-moz-range-track{background:transparent}
+.fe-range::-moz-range-thumb{pointer-events:auto;width:18px;height:18px;border-radius:50%;background:#fffdf6;border:2px solid #4e2610;cursor:pointer}
+.fe-range:focus-visible{box-shadow:none}
+.fe-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 2px #faf5e8,0 0 0 4px #4e2610}
+</style>
+</helmet>
+<div style="width: 1440px; height: 2840px; position: relative; display: flex; flex-direction: column; background: #faf5e8; color: #4e2610; font-family: Jost, Futura, system-ui, sans-serif; overflow: hidden">
+
+<!-- Bandeau d'annonce -->
+<div class="fe-deep" style="height: 40px; flex-shrink: 0; background: #2b1508; color: #f5ecd8; display: flex; align-items: center; justify-content: center; gap: 24px; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase">
+<span>Parfumerie du Moyen-Orient</span>
+<span style="color: #94735a">·</span>
+<span>Une sélection resserrée, uniquement des maisons de qualité</span>
+</div>
+
+<!-- En-tête -->
+<header style="height: 96px; flex-shrink: 0; box-sizing: border-box; padding: 0 80px; display: flex; align-items: center; gap: 64px; background: #faf5e8; border-bottom: 1px solid #e6dac0">
+<a href="Main.dc.html" aria-label="Frag Emirates, accueil" style="display: flex; flex-shrink: 0"><img src="../../logo/frag-emirates-logo-texte.svg" alt="Frag Emirates" style="height: 60px; width: auto; display: block"></a>
+<nav aria-label="Navigation principale" style="display: flex; gap: 48px; align-items: center">
+<a href="NosParfums.dc.html" aria-current="page" style="font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4e2610; padding: 12px 0; text-decoration: underline; text-decoration-color: #ead7a0; text-decoration-thickness: 2px; text-underline-offset: 8px">Nos parfums</a>
+<a class="fe-nav" href="Contact.dc.html" style="font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4e2610; padding: 12px 0">Nous contacter</a>
+</nav>
+<div style="flex-grow: 1"></div>
+<label style="width: 340px; height: 48px; box-sizing: border-box; border: 1px solid #9a7c5e; border-radius: 2px; display: flex; align-items: center; gap: 12px; padding: 0 16px; background: #fffdf6">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<span class="fe-sr">Rechercher un parfum</span>
+<input type="search" placeholder="Rechercher un parfum, une maison…" style="flex-grow: 1; min-width: 0; border: none; background: transparent; font-family: Jost, system-ui, sans-serif; font-size: 15px; color: #4e2610; outline: none">
+</label>
+<button type="button" aria-label="Panier" style="width: 44px; height: 44px; border: none; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+</button>
+</header>
+
+<!-- Titre + outils -->
+<section style="flex-shrink: 0; box-sizing: border-box; padding: 48px 80px 40px; display: flex; flex-direction: column; gap: 24px">
+<nav aria-label="Fil d'Ariane" style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340; display: flex; gap: 12px">
+<a href="Main.dc.html" style="color: #735340; text-underline-offset: 6px">Accueil</a><span aria-hidden="true">/</span><span style="color: #4e2610">Nos parfums</span>
+</nav>
+<h1 style="margin: 0; font-family: 'Cormorant Garamond', Garamond, serif; font-size: 64px; font-weight: 500; line-height: 1.05; letter-spacing: -0.01em">Nos parfums</h1>
+<div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px">
+<div style="position: relative; display: flex">
+<button class="fe-tool" type="button" onClick="{{openFilters}}" aria-expanded="{{filtersOpenStr}}" aria-controls="fe-drawer" style="height: 52px; min-width: 180px; box-sizing: border-box; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border: 1px solid #9a7c5e; border-radius: 2px 0 0 2px; background: transparent; font-family: Jost, system-ui, sans-serif; font-size: 17px; color: #4e2610; cursor: pointer">Filtres
+<svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="#4e2610" stroke-width="1.3" aria-hidden="true"><path d="M1 4h12"></path><circle cx="16" cy="4" r="2.5"></circle><path d="M21 12H9"></path><circle cx="6" cy="12" r="2.5"></circle></svg>
+</button>
+<button class="fe-tool" type="button" onClick="{{toggleSort}}" aria-expanded="{{sortOpenStr}}" aria-haspopup="listbox" style="height: 52px; min-width: 240px; box-sizing: border-box; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border: 1px solid #9a7c5e; border-left: none; border-radius: 0 2px 2px 0; background: {{sortBtnBg}}; font-family: Jost, system-ui, sans-serif; font-size: 17px; color: #4e2610; cursor: pointer">{{sortLabel}}
+<svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="#4e2610" stroke-width="1.3" aria-hidden="true"><path d="M1 4h12"></path><circle cx="16" cy="4" r="2.5"></circle><path d="M21 12H9"></path><circle cx="6" cy="12" r="2.5"></circle></svg>
+</button>
+<sc-if value="{{sortOpen}}" hint-placeholder-val="{{false}}">
+<ul role="listbox" aria-label="Trier par" style="position: absolute; top: 60px; left: 180px; z-index: 20; width: 240px; margin: 0; padding: 8px 0; list-style: none; background: #fffdf6; border: 1px solid #e6dac0; border-radius: 2px">
+<sc-for list="{{sortOptions}}" as="o" hint-placeholder-count="4">
+<li role="option" aria-selected="{{o.selectedStr}}" style="display: flex">
+<button class="fe-sortopt" type="button" onClick="{{o.pick}}" style="flex-grow: 1; height: 52px; padding: 0 24px; text-align: left; border: none; background: {{o.bg}}; font-family: Jost, system-ui, sans-serif; font-size: 16px; color: #4e2610; cursor: pointer">{{o.label}}</button>
+</li>
+</sc-for>
+</ul>
+</sc-if>
+</div>
+<span style="font-size: 14px; color: #735340">{{count}} parfums</span>
+</div>
+</section>
+
+<!-- Grille -->
+<section style="flex-shrink: 0; box-sizing: border-box; padding: 0 80px 80px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 24px; row-gap: 48px">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="12">
+<article style="display: flex; flex-direction: column; min-width: 0">
+<a href="{{p.href}}" aria-label="{{p.name}}" style="height: 302px; position: relative; overflow: hidden; background: #f3ead0; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{p.img}}" hint-placeholder-val="{{true}}">
+<img src="{{p.img}}" alt="{{p.alt}}" style="width: 100%; height: 100%; object-fit: cover; object-position: {{p.pos}}; display: block">
+</sc-if>
+<sc-if value="{{p.noImg}}" hint-placeholder-val="{{false}}">
+<svg width="90" height="170" viewBox="0 0 80 150" fill="none" stroke="#9a7c5e" stroke-width="1.2" aria-hidden="true"><rect x="28" y="6" width="24" height="22" rx="1"></rect><rect x="34" y="28" width="12" height="8"></rect><rect x="10" y="36" width="60" height="104" rx="4"></rect><rect x="22" y="70" width="36" height="40"></rect></svg>
+</sc-if>
+<sc-if value="{{p.isNew}}" hint-placeholder-val="{{false}}">
+<span style="position: absolute; left: 16px; top: 16px; padding: 4px 12px; border-radius: 9999px; background: #ead7a0; color: #4e2610; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase">Nouveau</span>
+</sc-if>
+<span style="position: absolute; right: 12px; bottom: 12px; padding: 4px 10px; border-radius: 2px; background: #fffdf6; font-size: 13px; color: #4e2610">{{p.notes}}</span>
+</a>
+<div style="padding-top: 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start">
+<span style="font-size: 14px; color: #735340">{{p.brand}}</span>
+<h2 style="margin: 0; font-family: 'Cormorant Garamond', Garamond, serif; font-size: 24px; font-weight: 600; line-height: 1.2"><a href="{{p.href}}" style="color: #4e2610; text-decoration: none">{{p.name}}</a></h2>
+<div style="font-family: 'Cormorant Garamond', Garamond, serif; font-size: 22px; font-weight: 600; line-height: 1.2">{{p.price}}</div>
+<span style="margin-top: 4px; padding: 5px 12px; border: 1px solid #9a7c5e; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase">{{p.volume}}</span>
+<button class="fe-btn" type="button" style="margin-top: 8px; align-self: stretch; height: 48px; border: none; border-radius: 2px; background: #4e2610; color: #faf5e8; font-family: Jost, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer">Ajouter au panier</button>
+</div>
+</article>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 16px">
+<span style="font-size: 14px; color: #735340">Vous avez vu {{count}} parfums sur [total]</span>
+<button class="fe-ghost" type="button" style="height: 52px; padding: 0 40px; border: 1px solid #9a7c5e; border-radius: 2px; background: transparent; color: #4e2610; font-family: Jost, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer">Voir plus de parfums</button>
+</div>
+</section>
+
+<!-- Pied de page : liens -->
+<footer class="fe-foot" style="flex-shrink: 0; box-sizing: border-box; padding: 80px 80px 64px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; background: #faf5e8; border-top: 1px solid #e6dac0">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">Services et contact</span>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 17px">
+<a href="#" style="text-decoration: none">Commandes</a>
+<a href="#" style="text-decoration: none">Livraison et retours</a>
+<a href="Contact.dc.html" style="text-decoration: none">Nous contacter</a>
+<a href="#" style="text-decoration: none">FAQ</a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">Informations légales</span>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 17px">
+<a href="#" style="text-decoration: none">Mentions légales</a>
+<a href="#" style="text-decoration: none">Politique de confidentialité</a>
+<a href="#" style="text-decoration: none">Conditions générales de vente</a>
+</div>
+</div>
+<div style="grid-column: span 2; display: flex; flex-direction: column; gap: 24px; padding-left: 40px">
+<span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">Restons en contact</span>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 520px">Recevez [XX] % de réduction sur votre premier achat, ainsi que nos nouveautés et offres exclusives tout au long de l'année.</p>
+<form style="display: flex; align-items: center; height: 64px; box-sizing: border-box; border: 1px solid #9a7c5e; border-radius: 2px; background: #fffdf6; padding: 0 8px 0 24px; max-width: 560px">
+<label style="flex-grow: 1; display: flex"><span class="fe-sr">Adresse e-mail</span><input type="email" placeholder="Adresse e-mail" style="flex-grow: 1; min-width: 0; border: none; background: transparent; font-family: Jost, system-ui, sans-serif; font-size: 16px; color: #4e2610; outline: none"></label>
+<button type="button" style="height: 44px; padding: 0 16px; border: none; background: transparent; color: #4e2610; font-family: Jost, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer">S'abonner</button>
+</form>
+</div>
+</footer>
+
+<!-- Pied de page : barre foncée -->
+<div class="fe-deep" style="flex-grow: 1; box-sizing: border-box; padding: 40px 80px 32px; display: flex; flex-direction: column; gap: 32px; background: #2b1508; color: #f5ecd8">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<div style="display: flex; gap: 8px; align-items: center">
+<a href="#" aria-label="Instagram" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5ecd8" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="#f5ecd8"></circle></svg></a>
+<a href="#" aria-label="YouTube" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="26" height="24" viewBox="0 0 26 24" fill="none" stroke="#f5ecd8" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="22" height="14" rx="4"></rect><path d="M11 9l5 3-5 3z"></path></svg></a>
+<a href="#" aria-label="TikTok" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5ecd8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"></path><path d="M14 3c.5 2.8 2.4 4.5 5 4.7"></path></svg></a>
+<a href="#" aria-label="LinkedIn" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5ecd8" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.2v.1"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.8 1-3 2.5-3s2.5 1 2.5 3V17"></path></svg></a>
+</div>
+<ul aria-label="Moyens de paiement" style="margin: 0; padding: 0; list-style: none; display: flex; gap: 8px">
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">CB</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">Visa</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">Mastercard</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">Apple Pay</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">Google Pay</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">PayPal</li>
+</ul>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #4a2c18; padding-top: 24px">
+<span style="font-size: 14px; color: #c9b48f">Copyright © 2026 Frag Emirates. Tous droits réservés.</span>
+<a class="fe-btn-sand" href="#" aria-label="Revenir en haut de la page" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: #ead7a0; border-radius: 2px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b1508" stroke-width="1.8" aria-hidden="true"><path d="M5 15l7-7 7 7"></path></svg></a>
+</div>
+</div>
+
+<!-- Panneau de filtres (masqué par défaut) -->
+<sc-if value="{{filtersOpen}}" hint-placeholder-val="{{false}}">
+<div onClick="{{closeFilters}}" aria-hidden="true" style="position: absolute; inset: 0; z-index: 30; background: rgba(43, 21, 8, 0.45)"></div>
+<aside id="fe-drawer" role="dialog" aria-modal="true" aria-labelledby="fe-drawer-title" style="position: absolute; top: 0; left: 0; bottom: 0; z-index: 31; width: 520px; box-sizing: border-box; padding: 40px 48px 48px; background: #faf5e8; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: flex-end">
+<button type="button" onClick="{{closeFilters}}" aria-label="Fermer les filtres" style="width: 44px; height: 44px; border: none; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.4" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg></button>
+</div>
+<h2 id="fe-drawer-title" style="margin: 0 0 24px; font-family: 'Cormorant Garamond', Garamond, serif; font-size: 44px; font-weight: 500; line-height: 1.1">Filtrer par</h2>
+
+<details open style="border-bottom: 1px solid #e6dac0; padding-bottom: 24px">
+<summary style="height: 64px; display: flex; align-items: center; justify-content: space-between; font-family: 'Cormorant Garamond', Garamond, serif; font-size: 26px; font-weight: 600">Maison<svg class="fe-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.4" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg></summary>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label class="fe-opt"><input type="checkbox">Swiss Arabian</label>
+<label class="fe-opt"><input type="checkbox">French Avenue</label>
+<label class="fe-opt"><input type="checkbox">Khadlaj</label>
+<label class="fe-opt"><input type="checkbox">Arabiyat Prestige</label>
+</div>
+</details>
+
+<details open style="border-bottom: 1px solid #e6dac0; padding-bottom: 24px">
+<summary style="height: 64px; display: flex; align-items: center; justify-content: space-between; font-family: 'Cormorant Garamond', Garamond, serif; font-size: 26px; font-weight: 600">Famille olfactive<svg class="fe-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.4" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg></summary>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<label class="fe-opt"><input type="checkbox">Ambré</label>
+<label class="fe-opt"><input type="checkbox">Boisé</label>
+<label class="fe-opt"><input type="checkbox">Épicé</label>
+<label class="fe-opt"><input type="checkbox">Fruité</label>
+<label class="fe-opt"><input type="checkbox">Gourmand</label>
+<sc-if value="{{moreFamilies}}" hint-placeholder-val="{{false}}">
+<label class="fe-opt"><input type="checkbox">Floral</label>
+<label class="fe-opt"><input type="checkbox">Frais</label>
+<label class="fe-opt"><input type="checkbox">Musqué</label>
+</sc-if>
+</div>
+<button type="button" onClick="{{toggleMoreFamilies}}" style="margin-top: 12px; padding: 8px 0; border: none; background: transparent; font-family: Jost, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4e2610; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; cursor: pointer">{{moreLabel}}</button>
+</details>
+
+<details open style="border-bottom: 1px solid #e6dac0; padding-bottom: 24px">
+<summary style="height: 64px; display: flex; align-items: center; justify-content: space-between; font-family: 'Cormorant Garamond', Garamond, serif; font-size: 26px; font-weight: 600">Prix<svg class="fe-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.4" aria-hidden="true"><path d="M6 15l6-6 6 6"></path></svg></summary>
+<div style="display: flex; flex-direction: column; gap: 24px; padding-top: 8px">
+<div style="position: relative; height: 24px">
+<div style="position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: #e6dac0"></div>
+<div style="position: absolute; top: 11px; height: 2px; left: {{priceLeft}}; width: {{priceWidth}}; background: #4e2610"></div>
+<input class="fe-range" type="range" min="1" max="100" step="1" value="{{pmin}}" onChange="{{setMin}}" aria-label="Prix minimum">
+<input class="fe-range" type="range" min="1" max="100" step="1" value="{{pmax}}" onChange="{{setMax}}" aria-label="Prix maximum">
+</div>
+<div style="display: flex; align-items: center; gap: 16px">
+<div style="flex-grow: 1; height: 48px; box-sizing: border-box; padding: 0 16px; border: 1px solid #9a7c5e; border-radius: 2px; background: #fffdf6; display: flex; align-items: center; justify-content: space-between; font-size: 16px"><span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">Min</span>{{pmin}} €</div>
+<span aria-hidden="true" style="color: #735340">—</span>
+<div style="flex-grow: 1; height: 48px; box-sizing: border-box; padding: 0 16px; border: 1px solid #9a7c5e; border-radius: 2px; background: #fffdf6; display: flex; align-items: center; justify-content: space-between; font-size: 16px"><span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">Max</span>{{pmax}} €</div>
+</div>
+</div>
+</details>
+
+<div style="display: flex; gap: 12px; margin-top: 32px">
+<button class="fe-ghost" type="button" onClick="{{resetPrice}}" style="flex-grow: 1; height: 56px; border: 1px solid #4e2610; border-radius: 2px; background: transparent; color: #4e2610; font-family: Jost, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer">Tout effacer</button>
+<button class="fe-btn" type="button" onClick="{{closeFilters}}" style="flex-grow: 1; height: 56px; border: none; border-radius: 2px; background: #4e2610; color: #faf5e8; font-family: Jost, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer">Voir les résultats</button>
+</div>
+</aside>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"showFilters":{"editor":"boolean","default":false,"section":"Aperçu"},"showSort":{"editor":"boolean","default":false,"section":"Aperçu"},"$preview":{"width":1440,"height":2840}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filters: null, sort: null, sortKey: 'new', more: false, pmin: 1, pmax: 100 };
+  }
+  renderVals() {
+    var self = this;
+    var filtersOpen = this.state.filters === null ? !!this.props.showFilters : this.state.filters;
+    var sortOpen = this.state.sort === null ? !!this.props.showSort : this.state.sort;
+    var sorts = [
+      { key: 'new', label: 'Nouveautés' },
+      { key: 'best', label: 'Meilleures ventes' },
+      { key: 'asc', label: 'Prix : croissant' },
+      { key: 'desc', label: 'Prix : décroissant' }
+    ];
+    var current = sorts.filter(function (s) { return s.key === self.state.sortKey; })[0];
+    var ph = function (brand) {
+      return { brand: brand, name: '[Nom du parfum]', notes: '[Famille olfactive]', price: '[Prix] €', volume: '[Contenance]', img: '', alt: '', pos: 'center', noImg: true, isNew: false, href: '#' };
+    };
+    var products = [
+      { brand: 'French Avenue', name: 'Vulcan Feu', notes: 'Mangue, piment, thym, oud', price: '[Prix] €', volume: '100 ml', img: '../../images/vulcan-feu.jpg', alt: 'Flacon Vulcan Feu de French Avenue', pos: 'center 55%', noImg: false, isNew: true, href: 'Parfum.dc.html' },
+      { brand: 'French Avenue', name: 'Grecia', notes: '[Famille olfactive]', price: '[Prix] €', volume: '100 ml', img: '../../images/grecia.jpg', alt: 'Flacon Grecia de French Avenue', pos: 'center 45%', noImg: false, isNew: true, href: '#' },
+      { brand: 'French Avenue', name: 'Royal Blend', notes: '[Famille olfactive]', price: '[Prix] €', volume: '100 ml', img: '../../images/royal-blend.jpg', alt: 'Flacon Royal Blend de French Avenue', pos: 'center 62%', noImg: false, isNew: true, href: '#' },
+      ph('Swiss Arabian'), ph('Khadlaj'), ph('Arabiyat Prestige'), ph('Swiss Arabian'),
+      ph('Khadlaj'), ph('Arabiyat Prestige'), ph('Swiss Arabian'), ph('Khadlaj'), ph('Arabiyat Prestige')
+    ];
+    return {
+      products: products,
+      count: products.length,
+      filtersOpen: filtersOpen,
+      filtersOpenStr: filtersOpen ? 'true' : 'false',
+      sortOpen: sortOpen,
+      sortOpenStr: sortOpen ? 'true' : 'false',
+      sortBtnBg: sortOpen ? '#f3ead0' : 'transparent',
+      sortLabel: this.state.sortKey === 'new' ? 'Trier par' : current.label,
+      sortOptions: sorts.map(function (s) {
+        var sel = s.key === self.state.sortKey;
+        return { label: s.label, bg: sel ? '#f3ead0' : 'transparent', selectedStr: sel ? 'true' : 'false', pick: function () { self.setState({ sortKey: s.key, sort: false }); } };
+      }),
+      openFilters: function () { self.setState({ filters: true, sort: false }); },
+      closeFilters: function () { self.setState({ filters: false }); },
+      toggleSort: function () { self.setState({ sort: !sortOpen }); },
+      pmin: this.state.pmin,
+      pmax: this.state.pmax,
+      priceLeft: ((this.state.pmin - 1) / 99 * 100) + '%',
+      priceWidth: ((this.state.pmax - this.state.pmin) / 99 * 100) + '%',
+      setMin: function (e) { var v = Number(e.target.value); self.setState({ pmin: Math.min(v, self.state.pmax - 1) }); },
+      setMax: function (e) { var v = Number(e.target.value); self.setState({ pmax: Math.max(v, self.state.pmin + 1) }); },
+      resetPrice: function () { self.setState({ pmin: 1, pmax: 100 }); },
+      moreFamilies: this.state.more,
+      moreLabel: this.state.more ? 'Afficher moins' : 'Afficher plus',
+      toggleMoreFamilies: function () { self.setState({ more: !self.state.more }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

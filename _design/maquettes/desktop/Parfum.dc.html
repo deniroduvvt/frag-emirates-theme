@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Frag Emirates — Vulcan Feu</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&amp;family=Jost:wght@300;400;500&amp;display=swap">
+<style>
+body{margin:0;background:#faf5e8;font-family:"Jost","Futura","Avenir Next",system-ui,sans-serif;color:#4e2610}
+a{color:#4e2610}a:hover{color:#3a1c0b}
+.fe-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.fe-btn:hover{background:#3a1c0b}
+.fe-btn-sand:hover{background:#f2e3b8}
+.fe-step:hover{background:#f3ead0}
+.fe-nav{text-decoration:underline;text-decoration-color:transparent;text-decoration-thickness:2px;text-underline-offset:8px}
+.fe-nav:hover{text-decoration-color:#ead7a0}
+.fe-foot a:hover{text-decoration:underline;text-decoration-color:#ead7a0;text-decoration-thickness:2px;text-underline-offset:4px}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:none;box-shadow:0 0 0 2px #faf5e8,0 0 0 4px #4e2610}
+.fe-deep a:focus-visible,.fe-deep button:focus-visible{box-shadow:0 0 0 2px #2b1508,0 0 0 4px #ead7a0}
+input::placeholder{color:#735340}
+details summary{list-style:none;cursor:pointer}
+details summary::-webkit-details-marker{display:none}
+details[open] .fe-chev{transform:rotate(180deg)}
+</style>
+</helmet>
+<div style="width: 1440px; height: 2420px; display: flex; flex-direction: column; background: #faf5e8; color: #4e2610; font-family: Jost, Futura, system-ui, sans-serif; overflow: hidden">
+
+<!-- Bandeau d'annonce -->
+<div class="fe-deep" style="height: 40px; flex-shrink: 0; background: #2b1508; color: #f5ecd8; display: flex; align-items: center; justify-content: center; gap: 24px; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase">
+<span>Parfumerie du Moyen-Orient</span>
+<span style="color: #94735a">·</span>
+<span>Une sélection resserrée, uniquement des maisons de qualité</span>
+</div>
+
+<!-- En-tête -->
+<header style="height: 96px; flex-shrink: 0; box-sizing: border-box; padding: 0 80px; display: flex; align-items: center; gap: 64px; background: #faf5e8; border-bottom: 1px solid #e6dac0">
+<a href="Main.dc.html" aria-label="Frag Emirates, accueil" style="display: flex; flex-shrink: 0"><img src="../../logo/frag-emirates-logo-texte.svg" alt="Frag Emirates" style="height: 60px; width: auto; display: block"></a>
+<nav aria-label="Navigation principale" style="display: flex; gap: 48px; align-items: center">
+<a class="fe-nav" href="NosParfums.dc.html" style="font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4e2610; padding: 12px 0">Nos parfums</a>
+<a class="fe-nav" href="Contact.dc.html" style="font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #4e2610; padding: 12px 0">Nous contacter</a>
+</nav>
+<div style="flex-grow: 1"></div>
+<label style="width: 340px; height: 48px; box-sizing: border-box; border: 1px solid #9a7c5e; border-radius: 2px; display: flex; align-items: center; gap: 12px; padding: 0 16px; background: #fffdf6">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<span class="fe-sr">Rechercher un parfum</span>
+<input type="search" placeholder="Rechercher un parfum, une maison…" style="flex-grow: 1; min-width: 0; border: none; background: transparent; font-family: Jost, system-ui, sans-serif; font-size: 15px; color: #4e2610; outline: none">
+</label>
+<button type="button" aria-label="Panier" style="width: 44px; height: 44px; border: none; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+</button>
+</header>
+
+<!-- Fil d'Ariane -->
+<nav aria-label="Fil d'Ariane" style="height: 56px; flex-shrink: 0; box-sizing: border-box; padding: 0 80px; display: flex; align-items: center; gap: 8px; font-size: 14px; color: #735340">
+<a href="Main.dc.html" style="color: #735340">Accueil</a><span aria-hidden="true">›</span>
+<a href="NosParfums.dc.html" style="color: #735340">Nos parfums</a><span aria-hidden="true">›</span>
+<span aria-current="page" style="color: #4e2610">Vulcan Feu</span>
+</nav>
+
+<!-- Produit -->
+<section style="flex-shrink: 0; box-sizing: border-box; padding: 16px 80px 80px; display: flex; gap: 80px; align-items: flex-start">
+<!-- Galerie -->
+<div style="display: flex; gap: 16px; flex-shrink: 0">
+<div style="display: flex; flex-direction: column; gap: 12px; width: 96px">
+<button type="button" aria-label="Voir la photo 1" style="width: 96px; height: 120px; padding: 0; border: 2px solid #4e2610; border-radius: 2px; overflow: hidden; background: #f3ead0; cursor: pointer"><img src="../../images/vulcan-feu.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block"></button>
+<button type="button" aria-label="Voir la photo 2" style="width: 96px; height: 120px; padding: 0; border: 1px solid #e6dac0; border-radius: 2px; background: #f3ead0; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="28" height="52" viewBox="0 0 80 150" fill="none" stroke="#9a7c5e" stroke-width="2" aria-hidden="true"><rect x="28" y="6" width="24" height="22" rx="1"></rect><rect x="34" y="28" width="12" height="8"></rect><rect x="10" y="36" width="60" height="104" rx="4"></rect></svg></button>
+<button type="button" aria-label="Voir la photo 3" style="width: 96px; height: 120px; padding: 0; border: 1px solid #e6dac0; border-radius: 2px; background: #f3ead0; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="28" height="52" viewBox="0 0 80 150" fill="none" stroke="#9a7c5e" stroke-width="2" aria-hidden="true"><rect x="28" y="6" width="24" height="22" rx="1"></rect><rect x="34" y="28" width="12" height="8"></rect><rect x="10" y="36" width="60" height="104" rx="4"></rect></svg></button>
+</div>
+<div style="width: 560px; height: 760px; background: #2b1508; overflow: hidden">
+<img src="../../images/vulcan-feu.jpg" alt="Flacon Vulcan Feu de French Avenue entouré de mangue, piment, thym et bois d'oud" style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block">
+</div>
+</div>
+
+<!-- Infos -->
+<div style="flex-grow: 1; min-width: 0; display: flex; flex-direction: column; gap: 24px; padding-top: 8px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<a href="#" style="align-self: flex-start; font-size: 14px; color: #4e2610; text-decoration: underline; text-decoration-color: #9a7c5e; text-underline-offset: 4px">French Avenue</a>
+<h1 style="margin: 0; font-family: 'Cormorant Garamond', Garamond, serif; font-size: 44px; font-weight: 500; line-height: 1.1">Vulcan Feu</h1>
+<span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">[Concentration] · 100 ml</span>
+</div>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4e2610">[Description courte — deux ou trois phrases sur le caractère du parfum, son sillage et le moment où le porter.]</p>
+<div style="display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid #e6dac0">
+<div style="display: flex; align-items: baseline; justify-content: space-between">
+<span id="fe-vol" style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase">Contenance <span style="font-weight: 600">100 ml</span></span>
+<span style="display: flex; align-items: baseline; gap: 10px"><span style="font-size: 13px; color: #735340">TVA incluse</span><span style="font-family: 'Cormorant Garamond', Garamond, serif; font-size: 30px; font-weight: 600">[Prix] €</span></span>
+</div>
+<div role="radiogroup" aria-labelledby="fe-vol" style="display: flex; gap: 8px">
+<button type="button" role="radio" aria-checked="true" style="height: 44px; padding: 0 20px; border: 1px solid #4e2610; border-radius: 2px; background: #ead7a0; color: #4e2610; font-family: Jost, system-ui, sans-serif; font-size: 14px; font-weight: 500; cursor: pointer">100 ml</button>
+</div>
+<div style="display: flex; gap: 16px; align-items: stretch">
+<div style="display: flex; align-items: center; border: 1px solid #9a7c5e; border-radius: 2px; height: 52px; box-sizing: border-box">
+<button class="fe-step" type="button" aria-label="Retirer un" onClick="{{dec}}" style="width: 48px; height: 50px; border: none; background: transparent; font-size: 20px; color: #4e2610; cursor: pointer">−</button>
+<span aria-live="polite" style="width: 36px; text-align: center; font-size: 16px; font-weight: 500">{{qty}}</span>
+<button class="fe-step" type="button" aria-label="Ajouter un" onClick="{{inc}}" style="width: 48px; height: 50px; border: none; background: transparent; font-size: 20px; color: #4e2610; cursor: pointer">+</button>
+</div>
+<button class="fe-btn" type="button" style="flex-grow: 1; height: 52px; border: none; border-radius: 2px; background: #4e2610; color: #faf5e8; font-family: Jost, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer">Ajouter au panier</button>
+</div>
+<ul style="margin: 0; padding: 20px 24px; list-style: none; display: flex; flex-direction: column; gap: 12px; background: #f3ead0; font-size: 15px">
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M2 7h12v9H2z"></path><path d="M14 10h4l3 3v3h-7z"></path><circle cx="6" cy="18" r="1.8"></circle><circle cx="17" cy="18" r="1.8"></circle></svg>Livraison en [délai] · offerte dès [montant] €</li>
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7"></path><path d="M4 4v4h4"></path></svg>Retours sous [XX] jours</li>
+<li style="display: flex; gap: 12px; align-items: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4e2610" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="1"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>Paiement sécurisé</li>
+</ul>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding-top: 24px; border-top: 1px solid #e6dac0">
+<span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">Pyramide olfactive</span>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px">
+<li style="font-size: 16px; line-height: 1.5"><span style="font-weight: 500">Notes de tête :</span> [notes de tête]</li>
+<li style="font-size: 16px; line-height: 1.5"><span style="font-weight: 500">Notes de cœur :</span> [notes de cœur]</li>
+<li style="font-size: 16px; line-height: 1.5"><span style="font-weight: 500">Notes de fond :</span> [notes de fond]</li>
+</ul>
+</div>
+
+
+</div>
+</section>
+
+<!-- Vous aimerez aussi -->
+<section aria-labelledby="fe-also" style="flex-shrink: 0; box-sizing: border-box; padding: 80px; display: flex; flex-direction: column; gap: 48px; background: #f3ead0">
+<div style="display: flex; align-items: flex-end; justify-content: space-between">
+<h2 id="fe-also" style="margin: 0; font-family: 'Cormorant Garamond', Garamond, serif; font-size: 44px; font-weight: 500; line-height: 1.1">Vous aimerez aussi</h2>
+<a href="NosParfums.dc.html" style="font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #4e2610; text-decoration: underline; text-underline-offset: 6px; padding: 12px 0">Voir tous nos parfums</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px">
+<sc-for list="{{related}}" as="p" hint-placeholder-count="4">
+<article style="display: flex; flex-direction: column; min-width: 0">
+<a href="{{p.href}}" aria-label="{{p.name}}" style="height: 302px; position: relative; overflow: hidden; background: #fffdf6; display: flex; align-items: center; justify-content: center">
+<sc-if value="{{p.img}}" hint-placeholder-val="{{true}}">
+<img src="{{p.img}}" alt="{{p.alt}}" style="width: 100%; height: 100%; object-fit: cover; object-position: {{p.pos}}; display: block">
+</sc-if>
+<sc-if value="{{p.noImg}}" hint-placeholder-val="{{false}}">
+<svg width="90" height="170" viewBox="0 0 80 150" fill="none" stroke="#9a7c5e" stroke-width="1.2" aria-hidden="true"><rect x="28" y="6" width="24" height="22" rx="1"></rect><rect x="34" y="28" width="12" height="8"></rect><rect x="10" y="36" width="60" height="104" rx="4"></rect><rect x="22" y="70" width="36" height="40"></rect></svg>
+</sc-if>
+<span style="position: absolute; right: 12px; bottom: 12px; padding: 4px 10px; border-radius: 2px; background: #fffdf6; font-size: 13px; color: #4e2610">{{p.notes}}</span>
+</a>
+<div style="padding-top: 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start">
+<span style="font-size: 14px; color: #735340">{{p.brand}}</span>
+<h3 style="margin: 0; font-family: 'Cormorant Garamond', Garamond, serif; font-size: 24px; font-weight: 600; line-height: 1.2"><a href="{{p.href}}" style="color: #4e2610; text-decoration: none">{{p.name}}</a></h3>
+<div style="font-family: 'Cormorant Garamond', Garamond, serif; font-size: 22px; font-weight: 600; line-height: 1.2">{{p.price}}</div>
+<span style="margin-top: 4px; padding: 5px 12px; border: 1px solid #9a7c5e; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase">{{p.volume}}</span>
+<button class="fe-btn" type="button" style="margin-top: 8px; align-self: stretch; height: 48px; border: none; border-radius: 2px; background: #4e2610; color: #faf5e8; font-family: Jost, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer">Ajouter au panier</button>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<!-- Pied de page : liens -->
+<footer class="fe-foot" style="flex-shrink: 0; box-sizing: border-box; padding: 80px 80px 64px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; background: #faf5e8; border-top: 1px solid #e6dac0">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">Services et contact</span>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 17px">
+<a href="#" style="text-decoration: none">Commandes</a>
+<a href="#" style="text-decoration: none">Livraison et retours</a>
+<a href="Contact.dc.html" style="text-decoration: none">Nous contacter</a>
+<a href="#" style="text-decoration: none">FAQ</a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">Informations légales</span>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 17px">
+<a href="#" style="text-decoration: none">Mentions légales</a>
+<a href="#" style="text-decoration: none">Politique de confidentialité</a>
+<a href="#" style="text-decoration: none">Conditions générales de vente</a>
+</div>
+</div>
+<div style="grid-column: span 2; display: flex; flex-direction: column; gap: 24px; padding-left: 40px">
+<span style="font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #735340">Restons en contact</span>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; max-width: 520px">Recevez [XX] % de réduction sur votre premier achat, ainsi que nos nouveautés et offres exclusives tout au long de l'année.</p>
+<form style="display: flex; align-items: center; height: 64px; box-sizing: border-box; border: 1px solid #9a7c5e; border-radius: 2px; background: #fffdf6; padding: 0 8px 0 24px; max-width: 560px">
+<label style="flex-grow: 1; display: flex"><span class="fe-sr">Adresse e-mail</span><input type="email" placeholder="Adresse e-mail" style="flex-grow: 1; min-width: 0; border: none; background: transparent; font-family: Jost, system-ui, sans-serif; font-size: 16px; color: #4e2610; outline: none"></label>
+<button type="button" style="height: 44px; padding: 0 16px; border: none; background: transparent; color: #4e2610; font-family: Jost, system-ui, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer">S'abonner</button>
+</form>
+</div>
+</footer>
+
+<!-- Pied de page : barre foncée -->
+<div class="fe-deep" style="flex-grow: 1; box-sizing: border-box; padding: 40px 80px 32px; display: flex; flex-direction: column; gap: 32px; background: #2b1508; color: #f5ecd8">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<div style="display: flex; gap: 8px; align-items: center">
+<a href="#" aria-label="Instagram" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5ecd8" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.6" fill="#f5ecd8"></circle></svg></a>
+<a href="#" aria-label="YouTube" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="26" height="24" viewBox="0 0 26 24" fill="none" stroke="#f5ecd8" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="22" height="14" rx="4"></rect><path d="M11 9l5 3-5 3z"></path></svg></a>
+<a href="#" aria-label="TikTok" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5ecd8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"></path><path d="M14 3c.5 2.8 2.4 4.5 5 4.7"></path></svg></a>
+<a href="#" aria-label="LinkedIn" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f5ecd8" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M8 10.5V17"></path><path d="M8 7.2v.1"></path><path d="M12 17v-6.5"></path><path d="M12 13.5c0-1.8 1-3 2.5-3s2.5 1 2.5 3V17"></path></svg></a>
+</div>
+<ul aria-label="Moyens de paiement" style="margin: 0; padding: 0; list-style: none; display: flex; gap: 8px">
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">CB</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">Visa</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">Mastercard</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">Apple Pay</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">Google Pay</li>
+<li style="padding: 6px 12px; border: 1px solid #94735a; border-radius: 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: #f5ecd8">PayPal</li>
+</ul>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #4a2c18; padding-top: 24px">
+<span style="font-size: 14px; color: #c9b48f">Copyright © 2026 Frag Emirates. Tous droits réservés.</span>
+<a class="fe-btn-sand" href="#" aria-label="Revenir en haut de la page" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: #ead7a0; border-radius: 2px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2b1508" stroke-width="1.8" aria-hidden="true"><path d="M5 15l7-7 7 7"></path></svg></a>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2420}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { qty: 1 };
+  }
+  renderVals() {
+    var self = this;
+    var ph = function (brand) {
+      return { brand: brand, name: '[Nom du parfum]', notes: '[Famille olfactive]', price: '[Prix] €', volume: '[Contenance]', img: '', alt: '', pos: 'center', noImg: true, href: '#' };
+    };
+    return {
+      qty: this.state.qty,
+      inc: function () { self.setState({ qty: Math.min(9, self.state.qty + 1) }); },
+      dec: function () { self.setState({ qty: Math.max(1, self.state.qty - 1) }); },
+      related: [
+        { brand: 'French Avenue', name: 'Grecia', notes: '[Famille olfactive]', price: '[Prix] €', volume: '100 ml', img: '../../images/grecia.jpg', alt: 'Flacon Grecia de French Avenue', pos: 'center 45%', noImg: false, href: '#' },
+        { brand: 'French Avenue', name: 'Royal Blend', notes: '[Famille olfactive]', price: '[Prix] €', volume: '100 ml', img: '../../images/royal-blend.jpg', alt: 'Flacon Royal Blend de French Avenue', pos: 'center 62%', noImg: false, href: '#' },
+        ph('Swiss Arabian'), ph('Khadlaj')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

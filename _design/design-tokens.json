@@ -1,0 +1,333 @@
+{
+  "name": "Design System",
+  "version": 1,
+  "color": {
+    "themes": [
+      {
+        "id": "ivoire",
+        "name": "Ivoire"
+      }
+    ],
+    "tokens": [
+      {
+        "name": "surface",
+        "value": "#faf5e8",
+        "usage": "Fond de page (ivoire). Le sol par défaut de tout le site."
+      },
+      {
+        "name": "surface-raised",
+        "value": "#fffdf6",
+        "usage": "Cartes produit et panneaux posés sur `surface` ; se distingue par le filet `line`, jamais par une ombre."
+      },
+      {
+        "name": "surface-sand",
+        "value": "#f3ead0",
+        "usage": "Sections claires alternées et fond des visuels produit (placeholder, packshot détouré)."
+      },
+      {
+        "name": "line",
+        "value": "#e6dac0",
+        "usage": "Filets décoratifs : séparateurs, bord des cartes. Ne porte aucun sens à lui seul."
+      },
+      {
+        "name": "line-strong",
+        "value": "#9a7c5e",
+        "usage": "Bord des contrôles (options de contenance, bouton ghost) : ≥ 3:1 sur `surface`, `surface-raised` et `surface-sand`."
+      },
+      {
+        "name": "ink",
+        "value": "#4e2610",
+        "usage": "Texte principal et titres (brun), sur `surface` (12:1), `surface-raised`, `surface-sand` et `sand`. Aussi le fond du bouton principal."
+      },
+      {
+        "name": "ink-muted",
+        "value": "#735340",
+        "usage": "Texte secondaire, mentions, prix barré, prix au litre — sur `surface`, `surface-raised`, `surface-sand` et `sand` (≥ 4.8:1)."
+      },
+      {
+        "name": "on-ink",
+        "value": "#faf5e8",
+        "usage": "Texte et icônes sur un aplat `ink` (libellé du bouton principal)."
+      },
+      {
+        "name": "ink-hover",
+        "value": "#3a1c0b",
+        "usage": "Survol du bouton principal (aplat `ink`)."
+      },
+      {
+        "name": "sand",
+        "value": "#ead7a0",
+        "usage": "Accent (sable) : option de contenance sélectionnée, badges, bouton accent, soulignés. Jamais comme couleur de texte sur fond clair (1.3:1)."
+      },
+      {
+        "name": "sand-hover",
+        "value": "#e2cc8c",
+        "usage": "Survol du bouton accent (aplat `sand`)."
+      },
+      {
+        "name": "on-sand",
+        "value": "{ink}",
+        "usage": "Texte sur un aplat `sand` — alias de `ink` (9:1)."
+      },
+      {
+        "name": "sale",
+        "value": "#8c2f1b",
+        "usage": "Prix remisé uniquement, toujours accompagné du prix barré (le sens ne repose pas sur la couleur). Sur les fonds clairs (≥ 7.6:1)."
+      },
+      {
+        "name": "deep",
+        "value": "#2b1508",
+        "usage": "Fond des sections mises en avant (brun profond) : bandeau héro, collection signature, pied de page."
+      },
+      {
+        "name": "deep-raised",
+        "value": "#3b1f0e",
+        "usage": "Cartes et panneaux posés sur `deep`."
+      },
+      {
+        "name": "line-deep",
+        "value": "#4a2c18",
+        "usage": "Filets décoratifs sur `deep` et `deep-raised`."
+      },
+      {
+        "name": "line-deep-strong",
+        "value": "#94735a",
+        "usage": "Bord des contrôles sur `deep` (4:1) et `deep-raised` (3.5:1)."
+      },
+      {
+        "name": "on-deep",
+        "value": "#f5ecd8",
+        "usage": "Texte principal (crème) sur `deep` (14.7:1) et `deep-raised` (12.9:1)."
+      },
+      {
+        "name": "on-deep-muted",
+        "value": "#c9b48f",
+        "usage": "Texte secondaire crème sur `deep` (8.6:1) et `deep-raised` (7.5:1)."
+      },
+      {
+        "name": "accent-on-deep",
+        "value": "{sand}",
+        "usage": "Accent sur fond foncé : bouton principal (texte `deep`), prix remisé, sélection, anneau de focus. 12:1 sur `deep`."
+      },
+      {
+        "name": "accent-on-deep-hover",
+        "value": "#f2e3b8",
+        "usage": "Survol du bouton principal dans une section `deep`."
+      },
+      {
+        "name": "link",
+        "value": "{ink}",
+        "usage": "Liens sur fond clair : `ink` souligné d’un filet `sand` épais ; sur `deep`, utiliser `on-deep`."
+      }
+    ]
+  },
+  "type": {
+    "fonts": [],
+    "families": {
+      "serif": "\"Cormorant Garamond\", \"Cormorant\", Garamond, \"Times New Roman\", serif",
+      "sans": "\"Jost\", \"Futura\", \"Avenir Next\", system-ui, sans-serif"
+    },
+    "groups": [
+      {
+        "name": "Titres",
+        "family": "serif",
+        "note": "Cormorant Garamond (Google Fonts), graisse 500–600. Interlignage serré, jamais en capitales.",
+        "styles": [
+          {
+            "name": "display-xl",
+            "fontSize": "64px",
+            "lineHeight": 1.05,
+            "fontWeight": 500,
+            "letterSpacing": "-0.01em",
+            "sample": "L’essence du temps",
+            "usage": "Titre héro, une fois par page, souvent sur `deep`."
+          },
+          {
+            "name": "display-lg",
+            "fontSize": "44px",
+            "lineHeight": 1.1,
+            "fontWeight": 500,
+            "letterSpacing": "-0.005em",
+            "sample": "La collection signature",
+            "usage": "Titre de section."
+          },
+          {
+            "name": "display-md",
+            "fontSize": "32px",
+            "lineHeight": 1.2,
+            "fontWeight": 500,
+            "sample": "Notes de cœur",
+            "usage": "Sous-sections, titre de fiche produit."
+          },
+          {
+            "name": "title",
+            "fontSize": "24px",
+            "lineHeight": 1.2,
+            "fontWeight": 600,
+            "sample": "Ambre Nocturne",
+            "usage": "Nom du produit dans la carte produit."
+          },
+          {
+            "name": "price",
+            "fontSize": "22px",
+            "lineHeight": 1.2,
+            "fontWeight": 600,
+            "sample": "89,00 €",
+            "usage": "Prix affiché (carte et fiche produit)."
+          },
+          {
+            "name": "quote",
+            "fontSize": "28px",
+            "lineHeight": 1.35,
+            "fontWeight": 400,
+            "fontStyle": "italic",
+            "sample": "Un sillage chaud, boisé, presque ambré.",
+            "usage": "Citations, accroches éditoriales."
+          }
+        ]
+      },
+      {
+        "name": "Texte",
+        "family": "sans",
+        "note": "Jost (Google Fonts). Labels et boutons en capitales espacées via CSS (text-transform), le reste en casse phrase.",
+        "styles": [
+          {
+            "name": "lead",
+            "fontSize": "20px",
+            "lineHeight": 1.5,
+            "fontWeight": 300,
+            "sample": "Des compositions lentes, pensées pour durer sur la peau.",
+            "usage": "Chapeau sous un titre de section."
+          },
+          {
+            "name": "body",
+            "fontSize": "16px",
+            "lineHeight": 1.6,
+            "fontWeight": 400,
+            "sample": "Bergamote, cardamome et fève tonka.",
+            "usage": "Paragraphes par défaut."
+          },
+          {
+            "name": "body-strong",
+            "fontSize": "16px",
+            "lineHeight": 1.5,
+            "fontWeight": 500,
+            "sample": "Livraison offerte dès 60 €",
+            "usage": "Emphase dans le texte."
+          },
+          {
+            "name": "caption",
+            "fontSize": "14px",
+            "lineHeight": 1.45,
+            "fontWeight": 400,
+            "sample": "soit 17,80 € / 10 ml",
+            "usage": "Mentions, prix au volume, légendes."
+          },
+          {
+            "name": "label",
+            "fontSize": "12px",
+            "lineHeight": 1.3,
+            "fontWeight": 500,
+            "letterSpacing": "0.14em",
+            "sample": "EAU DE PARFUM",
+            "usage": "Sur-titres, badges, légende du sélecteur — en capitales."
+          },
+          {
+            "name": "button",
+            "fontSize": "13px",
+            "lineHeight": 1.2,
+            "fontWeight": 500,
+            "letterSpacing": "0.1em",
+            "sample": "AJOUTER AU PANIER",
+            "usage": "Libellés de bouton — en capitales."
+          }
+        ]
+      }
+    ]
+  },
+  "spacing": {
+    "note": "Base 8px ; 4px pour les réglages fins.",
+    "tokens": [
+      {
+        "name": "space-1",
+        "value": "4px",
+        "usage": "Écart icône–libellé, prix–prix barré."
+      },
+      {
+        "name": "space-2",
+        "value": "8px",
+        "usage": "Écart entre options de contenance."
+      },
+      {
+        "name": "space-3",
+        "value": "12px",
+        "usage": "Entre lignes d’une même carte."
+      },
+      {
+        "name": "space-4",
+        "value": "16px",
+        "usage": "Padding interne des boutons (horizontal réduit), des options."
+      },
+      {
+        "name": "space-6",
+        "value": "24px",
+        "usage": "Padding des cartes produit ; gouttière de grille."
+      },
+      {
+        "name": "space-8",
+        "value": "32px",
+        "usage": "Padding horizontal des boutons larges ; entre blocs."
+      },
+      {
+        "name": "space-12",
+        "value": "48px",
+        "usage": "Marge sous un titre de section."
+      },
+      {
+        "name": "space-20",
+        "value": "80px",
+        "usage": "Padding vertical d’une section (`Surface`)."
+      }
+    ]
+  },
+  "radius": {
+    "note": "Angles presque vifs : c’est la typographie qui porte la douceur.",
+    "tokens": [
+      {
+        "name": "radius-none",
+        "value": "0",
+        "usage": "Sections, visuels produit."
+      },
+      {
+        "name": "radius-sm",
+        "value": "2px",
+        "usage": "Boutons, options de contenance, cartes."
+      },
+      {
+        "name": "radius-full",
+        "value": "9999px",
+        "usage": "Badges uniquement."
+      }
+    ]
+  },
+  "shadow": {
+    "note": "Une seule ombre, réservée au flacon posé sur une surface. L’interface n’a pas d’ombre.",
+    "tokens": [
+      {
+        "name": "shadow-product",
+        "value": "3px 5px 30px 0 #4e261038",
+        "usage": "Packshot détouré posé sur `surface-sand` : donne du poids au flacon. Jamais sur une carte ou un bouton."
+      },
+      {
+        "name": "focus-ring",
+        "value": "0 0 0 2px #faf5e8, 0 0 0 4px #4e2610",
+        "usage": "Focus clavier sur fond clair : écart ivoire 2px puis anneau `ink` 2px plein (12:1)."
+      },
+      {
+        "name": "focus-ring-deep",
+        "value": "0 0 0 2px #2b1508, 0 0 0 4px #ead7a0",
+        "usage": "Focus clavier dans une section `deep` : écart brun profond puis anneau `sand` (12:1)."
+      }
+    ]
+  }
+}
