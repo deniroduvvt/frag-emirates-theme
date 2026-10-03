@@ -14,3 +14,6 @@
 
 # Design sources (mockups, tokens, images, logo, handoff) - never pushed to Shopify
 _design/**
+
+# Claude Code instructions - local only
+CLAUDE.md
