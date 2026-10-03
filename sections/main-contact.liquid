@@ -97,36 +97,38 @@
         </div>
       </div>
 
-      <fieldset class="contact-form__fieldset">
-        <legend class="contact-field__label">
-          <span class="contact-form__desktop">{{ 'contact.contact_preference' | t }}</span>
-          <span class="contact-form__mobile">{{ 'contact.contact_preference_short' | t }}</span>
-        </legend>
-        <div class="contact-form__options">
-          <label class="contact-option">
-            <input type="checkbox" name="contact[Recontact par e-mail]" value="Oui">
-            {{- 'contact.by_email' | t -}}
-          </label>
-          <label class="contact-option">
-            <input type="checkbox" name="contact[Recontact par téléphone]" value="Oui">
-            {{- 'contact.by_phone' | t -}}
-          </label>
-          <label class="contact-option">
-            <input type="checkbox" name="contact[Recontact par WhatsApp]" value="Oui">
-            {{- 'contact.by_whatsapp' | t -}}
-          </label>
-        </div>
-      </fieldset>
+      <div class="contact-form__row contact-form__row--stack-mobile">
+        <fieldset class="contact-form__fieldset">
+          <legend class="contact-field__label">
+            <span class="contact-form__desktop">{{ 'contact.contact_preference' | t }}</span>
+            <span class="contact-form__mobile">{{ 'contact.contact_preference_short' | t }}</span>
+          </legend>
+          <div class="contact-form__options">
+            <label class="contact-option">
+              <input type="checkbox" name="contact[Recontact par e-mail]" value="Oui">
+              {{- 'contact.by_email' | t -}}
+            </label>
+            <label class="contact-option">
+              <input type="checkbox" name="contact[Recontact par téléphone]" value="Oui">
+              {{- 'contact.by_phone' | t -}}
+            </label>
+            <label class="contact-option">
+              <input type="checkbox" name="contact[Recontact par WhatsApp]" value="Oui">
+              {{- 'contact.by_whatsapp' | t -}}
+            </label>
+          </div>
+        </fieldset>
 
-      <div class="contact-field">
-        <label class="contact-field__label" for="ContactSubject">{{ 'contact.subject' | t }}</label>
-        <select class="contact-field__input contact-field__select" id="ContactSubject" name="contact[Sujet]">
-          <option value="">{{ 'contact.subject_placeholder' | t }}</option>
-          <option>{{ 'contact.subject_advice' | t }}</option>
-          <option>{{ 'contact.subject_order' | t }}</option>
-          <option>{{ 'contact.subject_shipping' | t }}</option>
-          <option>{{ 'contact.subject_other' | t }}</option>
-        </select>
+        <div class="contact-field">
+          <label class="contact-field__label" for="ContactSubject">{{ 'contact.subject' | t }}</label>
+          <select class="contact-field__input contact-field__select" id="ContactSubject" name="contact[Sujet]">
+            <option value="">{{ 'contact.subject_placeholder' | t }}</option>
+            <option>{{ 'contact.subject_advice' | t }}</option>
+            <option>{{ 'contact.subject_order' | t }}</option>
+            <option>{{ 'contact.subject_shipping' | t }}</option>
+            <option>{{ 'contact.subject_other' | t }}</option>
+          </select>
+        </div>
       </div>
 
       <div class="contact-field">
@@ -137,7 +139,7 @@
           class="contact-field__input contact-field__textarea"
           id="ContactMessage"
           name="contact[body]"
-          rows="7"
+          rows="4"
           required
           aria-required="true"
           placeholder="{{ 'contact.message_placeholder' | t }}"
@@ -201,7 +203,7 @@
   }
 
   .contact-form-wrap {
-    padding: 36px 20px var(--space-12);
+    padding: 28px 20px 40px;
   }
 
   .contact-form {
@@ -278,7 +280,7 @@
 
   .contact-field__input {
     width: 100%;
-    height: 52px;
+    height: 48px;
     padding: 0 var(--space-4);
     border: 1px solid var(--color-line-strong);
     border-radius: var(--radius-sm);
@@ -297,8 +299,8 @@
   }
 
   .contact-field__textarea {
-    height: 200px;
-    padding: var(--space-4);
+    height: 120px;
+    padding: var(--space-3) var(--space-4);
     line-height: var(--type-body-line-height);
     resize: vertical;
   }
@@ -348,7 +350,7 @@
   }
 
   .contact-form__submit {
-    min-height: 56px;
+    min-height: 48px;
     letter-spacing: var(--type-label-tracking);
   }
 
@@ -366,14 +368,14 @@
     .contact-intro__inner {
       flex-direction: row;
       align-items: flex-end;
-      gap: var(--space-20);
-      max-width: calc(1120px + var(--page-margin) * 2);
-      padding: 40px var(--page-margin) var(--space-12);
+      gap: var(--space-12);
+      max-width: calc(960px + var(--page-margin) * 2);
+      padding: var(--space-8) var(--page-margin);
     }
 
     .contact-intro__heading {
-      flex: 0 0 400px;
-      gap: var(--space-4);
+      flex: 0 0 auto;
+      gap: var(--space-3);
     }
 
     .contact-intro__title {
@@ -397,11 +399,11 @@
     }
 
     .contact-form-wrap {
-      padding: var(--space-20) var(--page-margin);
+      padding: var(--space-12) var(--page-margin) 64px;
     }
 
     .contact-form {
-      gap: var(--space-8);
+      gap: 20px;
     }
 
     .contact-form__title {
@@ -426,30 +428,20 @@
       gap: var(--space-6);
     }
 
-    .contact-field {
-      gap: 10px;
-    }
-
     .contact-field__label {
       font-size: var(--type-label-size);
     }
 
-    .contact-field__input {
-      height: 56px;
-      padding: 0 20px;
-    }
-
     .contact-field__textarea {
-      height: 200px;
-      padding: var(--space-4) 20px;
+      height: 140px;
     }
 
     .contact-form__fieldset legend {
-      margin-bottom: 10px;
+      margin-bottom: var(--space-1);
     }
 
     .contact-form__options {
-      column-gap: 40px;
+      column-gap: var(--space-6);
     }
 
     .contact-option {
