@@ -9,12 +9,48 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "button_link": "shopify://collections/nos-parfums"
+      }
+    },
+    "maisons": {
+      "type": "collection-links",
+      "settings": {
+        "collections": [
+          "swiss-arabian",
+          "french-avenue",
+          "khadlaj",
+          "arabiyat-prestige"
+        ]
+      }
+    },
+    "nouveautes": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Tout juste arrivés",
+        "heading": "Nouveautés",
+        "collection": "nouveautes",
+        "badge": "new",
+        "background": "surface"
+      }
+    },
+    "meilleures-ventes": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Les favoris de nos clients",
+        "heading": "Meilleures ventes",
+        "collection": "meilleures-ventes",
+        "badge": "rank",
+        "background": "sand"
+      }
     }
   },
   "order": [
-    "main"
+    "hero",
+    "maisons",
+    "nouveautes",
+    "meilleures-ventes"
   ]
 }

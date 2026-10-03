@@ -1,0 +1,290 @@
+{%- liquid
+  assign collection = section.settings.collection
+  assign heading_id = 'Heading-' | append: section.id
+  assign track_id = 'Track-' | append: section.id
+  assign show_new_badge = false
+  if section.settings.badge == 'new'
+    assign show_new_badge = true
+  endif
+  if section.settings.background == 'sand'
+    assign image_background = 'raised'
+  else
+    assign image_background = 'sand'
+  endif
+-%}
+
+<section
+  class="featured-collection featured-collection--{{ section.settings.background }} full-width"
+  aria-labelledby="{{ heading_id }}"
+>
+  <div class="featured-collection__inner">
+    <div class="featured-collection__header">
+      <div class="featured-collection__titles">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="featured-collection__eyebrow label">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        <h2 class="featured-collection__heading" id="{{ heading_id }}">{{ section.settings.heading }}</h2>
+      </div>
+
+      <div class="featured-collection__actions">
+        {%- if collection -%}
+          <a class="featured-collection__more" href="{{ collection.url }}">{{ 'sections.view_more' | t }}</a>
+        {%- endif -%}
+        <div class="featured-collection__arrows">
+          <button class="featured-collection__arrow" type="button" aria-controls="{{ track_id }}" aria-label="{{ 'sections.previous' | t }}" data-scroll="-1" disabled>
+            {% render 'icon', name: 'chevron-left', size: 16 %}
+          </button>
+          <button class="featured-collection__arrow" type="button" aria-controls="{{ track_id }}" aria-label="{{ 'sections.next' | t }}" data-scroll="1" disabled>
+            {% render 'icon', name: 'chevron-right', size: 16 %}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ul class="featured-collection__track" id="{{ track_id }}" role="list" tabindex="-1">
+      {%- for product in collection.products limit: section.settings.limit -%}
+        {%- liquid
+          assign form_id = 'CardForm-' | append: section.id | append: '-' | append: product.id
+          assign rank = nil
+          if section.settings.badge == 'rank'
+            assign rank = forloop.index
+          endif
+        -%}
+        <li class="featured-collection__item">
+          {% render 'product-card',
+            product: product,
+            form_id: form_id,
+            show_new_badge: show_new_badge,
+            rank: rank,
+            image_background: image_background
+          %}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% stylesheet %}
+  .featured-collection--sand {
+    background-color: var(--color-surface-sand);
+  }
+
+  .featured-collection__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--space-12) 20px;
+  }
+
+  .featured-collection__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .featured-collection__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .featured-collection__eyebrow {
+    font-size: 11px;
+    color: var(--color-ink-muted);
+  }
+
+  .featured-collection__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .featured-collection__more {
+    padding: var(--space-3) 0;
+    font-size: var(--type-label-size);
+    font-weight: var(--type-button-weight);
+    letter-spacing: var(--type-button-tracking);
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-underline-offset: 6px;
+  }
+
+  .featured-collection--sand .featured-collection__more {
+    text-decoration-color: var(--color-ink);
+    text-decoration-thickness: 1px;
+  }
+
+  .featured-collection__arrows {
+    display: none;
+  }
+
+  .featured-collection__track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px var(--space-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  .featured-collection__item:nth-child(n + 5) {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .featured-collection__inner {
+      gap: var(--space-12);
+      padding: var(--space-20) var(--page-margin);
+    }
+
+    .featured-collection__titles {
+      gap: var(--space-2);
+    }
+
+    .featured-collection__eyebrow {
+      font-size: var(--type-label-size);
+    }
+
+    .featured-collection__more {
+      font-size: var(--type-button-size);
+    }
+
+    .featured-collection__arrows {
+      display: flex;
+      gap: var(--space-2);
+    }
+
+    .featured-collection__arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--tap-target);
+      height: var(--tap-target);
+      padding: 0;
+      border: 1px solid var(--color-line-strong);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--color-ink);
+      cursor: pointer;
+    }
+
+    .featured-collection__arrow:hover:not(:disabled) {
+      background-color: var(--color-surface-sand);
+    }
+
+    .featured-collection--sand .featured-collection__arrow:hover:not(:disabled) {
+      background-color: var(--color-surface-raised);
+    }
+
+    .featured-collection__arrow:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    .featured-collection__track {
+      grid-template-columns: none;
+      grid-auto-flow: column;
+      grid-auto-columns: calc((100% - 3 * var(--space-6)) / 4);
+      gap: var(--space-6);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+
+    .featured-collection__track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .featured-collection__item,
+    .featured-collection__item:nth-child(n + 5) {
+      display: block;
+      scroll-snap-align: start;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const update = (track, buttons) => {
+      const max = track.scrollWidth - track.clientWidth - 1;
+      buttons.forEach((button) => {
+        const direction = Number(button.dataset.scroll);
+        button.disabled = direction < 0 ? track.scrollLeft <= 0 : track.scrollLeft >= max;
+      });
+    };
+
+    document.querySelectorAll('.featured-collection').forEach((section) => {
+      const track = section.querySelector('.featured-collection__track');
+      const buttons = section.querySelectorAll('[data-scroll]');
+      if (!track) return;
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          track.scrollBy({ left: Number(button.dataset.scroll) * track.clientWidth, behavior: smooth ? 'smooth' : 'auto' });
+        });
+      });
+
+      track.addEventListener('scroll', () => update(track, buttons), { passive: true });
+      new ResizeObserver(() => update(track, buttons)).observe(track);
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Collection en vedette",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Nouveautés"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Nombre de produits (desktop, défilement par 4)",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "default": 8,
+      "info": "En mobile, les 4 premiers sont affichés."
+    },
+    {
+      "type": "select",
+      "id": "badge",
+      "label": "Marqueur sur les cartes",
+      "options": [
+        { "value": "none", "label": "Aucun" },
+        { "value": "new", "label": "Badge « Nouveau »" },
+        { "value": "rank", "label": "Rang (N° 1, N° 2…)" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Fond",
+      "options": [
+        { "value": "surface", "label": "Ivoire" },
+        { "value": "sand", "label": "Sable" }
+      ],
+      "default": "surface"
+    }
+  ]
+}
+{% endschema %}

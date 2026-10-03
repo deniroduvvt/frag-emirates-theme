@@ -1,0 +1,108 @@
+<nav class="collection-links full-width" aria-label="{{ section.settings.heading | escape }}">
+  <div class="collection-links__inner">
+    <p class="collection-links__heading label">{{ section.settings.heading }}</p>
+    <span class="collection-links__divider" aria-hidden="true"></span>
+    <ul class="collection-links__list" role="list">
+      {%- for collection in section.settings.collections -%}
+        <li>
+          <a class="collection-links__link" href="{{ collection.url }}">{{ collection.title | escape }}</a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</nav>
+
+{% stylesheet %}
+  .collection-links {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .collection-links__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 28px 20px;
+  }
+
+  .collection-links__heading {
+    font-size: 11px;
+    color: var(--color-ink-muted);
+  }
+
+  .collection-links__divider {
+    display: none;
+  }
+
+  .collection-links__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-1) var(--space-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  .collection-links__link {
+    display: flex;
+    align-items: center;
+    min-height: var(--tap-target);
+    font-family: var(--font-serif);
+    font-size: 21px;
+    font-weight: var(--type-display-md-weight);
+    text-underline-offset: 5px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .collection-links__inner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      min-height: 88px;
+      padding: 0 var(--page-margin);
+    }
+
+    .collection-links__heading {
+      font-size: var(--type-label-size);
+    }
+
+    .collection-links__divider {
+      display: block;
+      width: 1px;
+      height: var(--space-6);
+      background-color: var(--color-line);
+    }
+
+    .collection-links__list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0 40px;
+    }
+
+    .collection-links__link {
+      font-size: var(--type-title-size);
+      text-underline-offset: 6px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Nos maisons",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Nos maisons"
+    },
+    {
+      "type": "collection_list",
+      "id": "collections",
+      "label": "Collections des maisons"
+    }
+  ]
+}
+{% endschema %}

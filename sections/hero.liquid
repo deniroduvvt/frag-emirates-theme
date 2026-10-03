@@ -1,0 +1,202 @@
+<section class="hero color-deep full-width" aria-label="{{ section.settings.aria_label | escape }}">
+  <div class="hero__media">
+    {%- if section.settings.image -%}
+      {{
+        section.settings.image
+        | image_url: width: 1720
+        | image_tag:
+          widths: '600, 900, 1200, 1720',
+          sizes: '(min-width: 990px) 60vw, 100vw',
+          fetchpriority: 'high',
+          alt: section.settings.image.alt
+      }}
+    {%- else -%}
+      {% render 'icon', name: 'bottle', size: 170 %}
+      <span class="hero__placeholder label">
+        <span class="hero__desktop">[Visuel — photo ou vidéo à définir]</span>
+        <span class="hero__mobile">[Visuel à définir]</span>
+      </span>
+    {%- endif -%}
+  </div>
+
+  <div class="hero__content">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="hero__eyebrow label">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h1 class="hero__heading">{{ section.settings.heading }}</h1>
+    {%- if section.settings.text != blank -%}
+      <p class="hero__text lead">{{ section.settings.text }}</p>
+    {%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="button hero__button" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">
+        {{- section.settings.button_label -}}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .hero {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__media {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    overflow: hidden;
+    background-color: var(--color-deep-raised);
+    color: var(--color-line-deep-strong);
+  }
+
+  .hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero__media > svg {
+    width: 100px;
+    height: auto;
+  }
+
+  .hero__placeholder {
+    position: absolute;
+    left: 20px;
+    bottom: var(--space-4);
+    font-size: 10px;
+    color: var(--color-on-deep-muted);
+  }
+
+  .hero__desktop {
+    display: none;
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-8) 20px 40px;
+  }
+
+  .hero__eyebrow {
+    font-size: 11px;
+    color: var(--color-on-deep-muted);
+  }
+
+  .hero__heading {
+    color: var(--color-on-deep);
+  }
+
+  .hero__text {
+    color: var(--color-on-deep-muted);
+  }
+
+  .hero__button {
+    width: 100%;
+    min-height: 52px;
+    margin-top: var(--space-2);
+  }
+
+  @media screen and (min-width: 990px) {
+    .hero {
+      flex-direction: row;
+      min-height: 620px;
+    }
+
+    .hero__media {
+      flex: 0 0 60%;
+      height: auto;
+    }
+
+    .hero__media > svg {
+      width: 170px;
+    }
+
+    .hero__placeholder {
+      left: var(--space-8);
+      bottom: 28px;
+      font-size: var(--type-label-size);
+    }
+
+    .hero__desktop {
+      display: inline;
+    }
+
+    .hero__mobile {
+      display: none;
+    }
+
+    .hero__content {
+      flex-grow: 1;
+      justify-content: center;
+      gap: var(--space-6);
+      padding: 0 var(--space-20);
+    }
+
+    .hero__eyebrow {
+      font-size: var(--type-label-size);
+    }
+
+    .hero__text {
+      max-width: 420px;
+    }
+
+    .hero__button {
+      align-self: flex-start;
+      width: auto;
+      margin-top: var(--space-4);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Héro",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Visuel"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre",
+      "default": "La sélection du moment"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "L'Orient, choisi flacon par flacon"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texte",
+      "default": "Swiss Arabian, French Avenue, Khadlaj, Arabiyat Prestige : seules les maisons qui tiennent leurs promesses sur la peau."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Libellé du bouton",
+      "default": "Découvrir"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Lien du bouton"
+    },
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Nom de la zone (lecteurs d'écran)",
+      "default": "Mise en avant"
+    }
+  ]
+}
+{% endschema %}

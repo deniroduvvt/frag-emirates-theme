@@ -71,6 +71,19 @@
     "password": "Mot de passe",
     "enter": "Entrer"
   },
+  "products": {
+    "add_to_cart": "Ajouter au panier",
+    "sold_out": "Épuisé",
+    "new": "Nouveau",
+    "rank": "N° {{ rank }}",
+    "regular_price": "Prix habituel",
+    "sale_price": "Prix réduit"
+  },
+  "sections": {
+    "view_more": "Voir plus",
+    "previous": "Précédent",
+    "next": "Suivant"
+  },
   "search": {
     "title": "Recherche",
     "placeholder": "Rechercher des articles, des pages ou des produits",
