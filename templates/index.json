@@ -18,6 +18,7 @@
     "maisons": {
       "type": "collection-links",
       "settings": {
+        "heading": "Nos marques",
         "collections": [
           "swiss-arabian",
           "french-avenue",
