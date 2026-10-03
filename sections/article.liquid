@@ -1,68 +1,144 @@
-{% comment %}
-  This section is used in the article template to render the article page, which
-  displays the full content of the blog post and can optionally include a
-  comments section for customers (not shown in this example).
-
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/article
-{% endcomment %}
-
-{% if article.image %}
-  {{ article.image | image_url: width: 1000 | image_tag }}
-{% endif %}
-
-<h1>{{ article.title }}</h1>
-
-{% assign date = article.published_at | time_tag: format: 'date' %}
-<p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-
-{{ article.content }}
-
-{% if blog.comments_enabled? %}
-  <h2>{{ 'blog.article_comments' | t }}</h2>
-
-  <div id="comments">
-    {% paginate article.comments by 10 %}
-      {% for comment in article.comments %}
-        <div>
-          <p>{{ comment.author }}</p>
-          <p>
-            {{- comment.created_at | time_tag: format: 'date' -}}
-          </p>
-          <p>{{ comment.content }}</p>
-        </div>
-      {% endfor %}
-
-      {{ paginate | default_pagination: anchor: 'comments' }}
-    {% endpaginate %}
+<article class="page-container page-container--narrow full-width">
+  <div class="page-heading">
+    <nav class="breadcrumb label" aria-label="{{ 'collections.breadcrumb' | t }}">
+      <a href="{{ routes.root_url }}">{{ 'collections.home' | t }}</a>
+      <span aria-hidden="true">/</span>
+      <a href="{{ blog.url }}">{{ blog.title | escape }}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ article.title | escape }}</span>
+    </nav>
+    <h1>{{ article.title | escape }}</h1>
+    {%- assign date = article.published_at | time_tag: format: 'date' -%}
+    <p class="article-page__meta">{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
   </div>
 
-  {% form 'new_comment', article %}
-    <h2>{{ 'blog.comment_form_title' | t }}</h2>
-
-    {{ form.errors | default_errors }}
-
-    <div>
-      <label for="author">{{ 'blog.comment_form_name' | t }}</label>
-      <input type="text" name="comment[author]" id="author" value="{{ form.author }}" required>
+  {%- if article.image -%}
+    <div class="article-page__image">
+      {{
+        article.image
+        | image_url: width: 1600
+        | image_tag:
+          widths: '600, 800, 1200, 1600',
+          sizes: '(min-width: 840px) 800px, 100vw',
+          alt: article.image.alt
+      }}
     </div>
+  {%- endif -%}
 
-    <div>
-      <label for="email">{{ 'blog.comment_form_email' | t }}</label>
-      <input type="email" name="comment[email]" id="email" value="{{ form.email }}" required>
-    </div>
+  <div class="rte">{{ article.content }}</div>
 
-    <div>
-      <label for="body">{{ 'blog.comment_form_body' | t }}</label>
-      <textarea name="comment[body]" id="body" required>{{ form.body }}</textarea>
-    </div>
+  {%- if blog.comments_enabled? -%}
+    <section class="article-comments" id="comments" aria-labelledby="CommentsTitle">
+      {%- if article.comments_count > 0 -%}
+        <h2 class="article-comments__title" id="CommentsTitle">{{ 'blog.article_comments' | t }}</h2>
+        {%- paginate article.comments by 10 -%}
+          <ul class="article-comments__list" role="list">
+            {%- for comment in article.comments -%}
+              <li class="article-comment">
+                <p class="article-comment__meta">
+                  <strong>{{ comment.author | escape }}</strong> · {{ comment.created_at | time_tag: format: 'date' }}
+                </p>
+                <div class="rte">{{ comment.content }}</div>
+              </li>
+            {%- endfor -%}
+          </ul>
+          {% render 'pagination', paginate: paginate, anchor: 'comments' %}
+        {%- endpaginate -%}
+      {%- endif -%}
 
-    <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
-  {% endform %}
-{% endif %}
+      {%- form 'new_comment', article, class: 'article-comments__form' -%}
+        <h2 class="article-comments__title"{% if article.comments_count == 0 %} id="CommentsTitle"{% endif %}>
+          {{- 'blog.comment_form_title' | t -}}
+        </h2>
+        {%- if form.errors -%}
+          <div class="article-comments__errors" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <div class="contact-form__row contact-form__row--stack-mobile">
+          <div class="contact-field">
+            <label class="contact-field__label" for="CommentAuthor">{{ 'blog.comment_form_name' | t }}</label>
+            <input class="contact-field__input" type="text" name="comment[author]" id="CommentAuthor" value="{{ form.author | escape }}" autocomplete="name" required>
+          </div>
+          <div class="contact-field">
+            <label class="contact-field__label" for="CommentEmail">{{ 'blog.comment_form_email' | t }}</label>
+            <input class="contact-field__input" type="email" name="comment[email]" id="CommentEmail" value="{{ form.email | escape }}" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="contact-field">
+          <label class="contact-field__label" for="CommentBody">{{ 'blog.comment_form_body' | t }}</label>
+          <textarea class="contact-field__input contact-field__textarea" name="comment[body]" id="CommentBody" rows="4" required>
+            {{- form.body -}}
+          </textarea>
+        </div>
+        <button class="button article-comments__submit" type="submit">{{ 'blog.comment_form_submit' | t }}</button>
+      {%- endform -%}
+    </section>
+  {%- endif -%}
+</article>
+
+{% stylesheet %}
+  .article-page__meta {
+    font-size: var(--type-caption-size);
+    color: var(--color-ink-muted);
+  }
+
+  .article-page__image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .article-comments {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .article-comments__title {
+    font-size: var(--type-display-md-size);
+  }
+
+  .article-comments__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: 0;
+    list-style: none;
+  }
+
+  .article-comment {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .article-comment__meta {
+    font-size: var(--type-caption-size);
+    color: var(--color-ink-muted);
+  }
+
+  .article-comments__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .article-comments__errors {
+    padding: var(--space-3) var(--space-4);
+    border-left: 2px solid var(--color-sale);
+    background-color: var(--color-surface-sand);
+  }
+
+  .article-comments__submit {
+    align-self: flex-start;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.article",
+  "name": "Article",
   "settings": []
 }
 {% endschema %}

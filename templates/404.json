@@ -11,7 +11,9 @@
   "sections": {
     "main": {
       "type": "404",
-      "settings": {}
+      "settings": {
+        "collection": "nos-parfums"
+      }
     }
   },
   "order": [

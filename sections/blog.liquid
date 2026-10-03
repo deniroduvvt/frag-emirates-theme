@@ -1,35 +1,114 @@
-{% comment %}
-  This section is used in the blog template to render the blog page listing all
-  articles within a blog.
+<div class="page-container full-width">
+  <div class="page-heading">
+    <nav class="breadcrumb label" aria-label="{{ 'collections.breadcrumb' | t }}">
+      <a href="{{ routes.root_url }}">{{ 'collections.home' | t }}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ blog.title | escape }}</span>
+    </nav>
+    <h1>{{ blog.title | escape }}</h1>
+  </div>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/blog
-{% endcomment %}
+  {%- paginate blog.articles by 6 -%}
+    <ul class="article-grid" role="list">
+      {%- for article in blog.articles -%}
+        <li class="article-card">
+          <a class="article-card__media" href="{{ article.url }}" tabindex="-1" aria-hidden="true">
+            {%- if article.image -%}
+              {{
+                article.image
+                | image_url: width: 800
+                | image_tag:
+                  widths: '400, 600, 800',
+                  sizes: '(min-width: 750px) 33vw, 100vw',
+                  loading: 'lazy',
+                  alt: ''
+              }}
+            {%- else -%}
+              {% render 'icon', name: 'bottle', size: 60 %}
+            {%- endif -%}
+          </a>
+          {%- assign date = article.published_at | time_tag: format: 'date' -%}
+          <p class="article-card__meta">{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
+          <h2 class="article-card__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h2>
+          {%- if article.excerpt_or_content != blank -%}
+            <p class="article-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 30 }}</p>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
 
-<h1>{{ blog.title }}</h1>
+    {% render 'pagination', paginate: paginate %}
+  {%- endpaginate -%}
+</div>
 
-{% paginate blog.articles by 5 %}
-  {% for article in blog.articles %}
-    <div>
-      {% if article.image %}
-        {{ article.image | image_url: width: 1000 | image_tag }}
-      {% endif %}
-      <h2>
-        {{ article.title | link_to: article.url }}
-      </h2>
-      {% assign date = article.published_at | time_tag: format: 'date' %}
-      <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
-      <p>{{ article.excerpt }}</p>
-    </div>
-  {% endfor %}
+{% stylesheet %}
+  .article-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-8);
+    padding: 0;
+    list-style: none;
+  }
 
-  {%- if paginate.pages > 1 -%}
-    {{- paginate | default_pagination -}}
-  {%- endif -%}
-{% endpaginate %}
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .article-card__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 2;
+    margin-bottom: var(--space-2);
+    overflow: hidden;
+    background-color: var(--color-surface-sand);
+    color: var(--color-line-strong);
+  }
+
+  .article-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .article-card__meta {
+    font-size: var(--type-caption-size);
+    color: var(--color-ink-muted);
+  }
+
+  .article-card__title {
+    font-size: var(--type-title-size);
+    line-height: var(--type-title-line-height);
+    font-weight: var(--type-title-weight);
+    letter-spacing: normal;
+  }
+
+  .article-card__title a {
+    text-decoration: none;
+  }
+
+  .article-card__title a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-sand);
+  }
+
+  .article-card__excerpt {
+    color: var(--color-ink-muted);
+  }
+
+  @media screen and (min-width: 750px) {
+    .article-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-12) var(--space-6);
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.blog",
+  "name": "Blog",
   "settings": []
 }
 {% endschema %}

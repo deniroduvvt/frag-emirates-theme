@@ -1,83 +1,102 @@
-{% comment %}
-  This section is used in the list-collections template to render a list of
-  collections.
+<div class="page-container full-width">
+  <div class="page-heading">
+    <nav class="breadcrumb label" aria-label="{{ 'collections.breadcrumb' | t }}">
+      <a href="{{ routes.root_url }}">{{ 'collections.home' | t }}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ 'collections.title' | t }}</span>
+    </nav>
+    <h1>{{ 'collections.title' | t }}</h1>
+  </div>
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
-{% endcomment %}
-
-<h1>{{ 'collections.title' | t }}</h1>
-
-<div
-  class="collections {{ section.settings.grid_item_width }}"
-  style="--grid-gap: {{ section.settings.grid_gap }}px"
->
-  {% for collection in collections %}
-    <a class="collection-card" href="{{ collection.url }}">
-      {% if collection.featured_image %}
-        {% render 'image',
-          class: 'collection-card__image',
-          image: collection.featured_image,
-          width: 600,
-          height: 600,
-          crop: 'center'
-        %}
-      {% endif %}
-
-      <div class="collection-card__content">
-        <p>{{ collection.title }}</p>
-
-        {% if collection.description %}
-          <p>{{ collection.description | strip_html | truncatewords: 15 }}</p>
-        {% endif %}
-      </div>
-    </a>
-  {% endfor %}
+  <ul class="collection-list" role="list">
+    {%- for collection in collections -%}
+      <li>
+        <a class="collection-tile" href="{{ collection.url }}">
+          <span class="collection-tile__media">
+            {%- if collection.featured_image -%}
+              {{
+                collection.featured_image
+                | image_url: width: 600
+                | image_tag:
+                  widths: '300, 450, 600',
+                  sizes: '(min-width: 750px) 25vw, 50vw',
+                  loading: 'lazy',
+                  alt: ''
+              }}
+            {%- else -%}
+              {% render 'icon', name: 'bottle', size: 60 %}
+            {%- endif -%}
+          </span>
+          <span class="collection-tile__title">{{ collection.title | escape }}</span>
+          <span class="collection-tile__count">{{ 'collections.count' | t: count: collection.products_count }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
 </div>
 
 {% stylesheet %}
-  .collections {
+  .collection-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(var(--collection-card-size), 100%), 1fr));
-    gap: var(--grid-gap);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px var(--space-3);
+    padding: 0;
+    list-style: none;
   }
-  .collections--compact {
-    --collection-card-size: 160px;
-  }
-  .collections--full {
-    --collection-card-size: 280px;
-  }
-  .collection-card {
+
+  .collection-tile {
     display: flex;
     flex-direction: column;
+    gap: var(--space-2);
+    text-decoration: none;
+  }
+
+  .collection-tile__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    margin-bottom: var(--space-1);
+    overflow: hidden;
+    background-color: var(--color-surface-sand);
+    color: var(--color-line-strong);
+  }
+
+  .collection-tile__media img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .collection-tile__title {
+    font-family: var(--font-serif);
+    font-size: var(--type-title-size);
+    font-weight: var(--type-title-weight);
+    line-height: var(--type-title-line-height);
+  }
+
+  .collection-tile:hover .collection-tile__title {
+    text-decoration: underline;
+    text-decoration-color: var(--color-sand);
+    text-decoration-thickness: 2px;
+  }
+
+  .collection-tile__count {
+    font-size: var(--type-caption-size);
+    color: var(--color-ink-muted);
+  }
+
+  @media screen and (min-width: 750px) {
+    .collection-list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-12) var(--space-6);
+    }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.collections_grid",
-  "settings": [
-    {
-      "type": "select",
-      "id": "grid_item_width",
-      "label": "t:labels.grid_item_width",
-      "options": [
-        { "value": "collections--compact", "label": "t:options.size.small" },
-        { "value": "collections--full", "label": "t:options.size.large" }
-      ],
-      "default": "collections--full"
-    },
-    {
-      "type": "range",
-      "id": "grid_gap",
-      "label": "t:labels.grid_gap",
-      "min": 0,
-      "max": 50,
-      "step": 5,
-      "unit": "px",
-      "default": 10
-    }
-  ],
-  "presets": [{ "name": "t:general.collections_grid" }]
+  "name": "Liste des collections",
+  "settings": []
 }
 {% endschema %}

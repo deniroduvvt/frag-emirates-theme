@@ -1,8 +1,10 @@
 {
   "404": {
-    "title": "404",
-    "not_found": "Page introuvable.",
-    "back_to_shopping": "Retour à la boutique"
+    "label": "Erreur 404",
+    "title": "Page introuvable",
+    "text": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "back_to_shopping": "Découvrir nos parfums",
+    "back_home": "Retour à l'accueil"
   },
   "accessibility": {
     "skip_to_content": "Aller au contenu"
@@ -161,13 +163,21 @@
   "sections": {
     "view_more": "Voir plus",
     "previous": "Précédent",
-    "next": "Suivant"
+    "next": "Suivant",
+    "pagination": "Pagination",
+    "previous_page": "Page précédente",
+    "next_page": "Page suivante",
+    "page": "Page {{ number }}"
   },
   "search": {
     "title": "Recherche",
-    "placeholder": "Rechercher des articles, des pages ou des produits",
+    "placeholder": "Rechercher un parfum, une maison…",
     "submit": "Rechercher",
-    "no_results_html": "Aucun résultat pour {{ terms }}",
-    "results_for_html": "{{ count }} résultats pour {{ terms }}"
+    "no_results_html": "Aucun résultat pour « {{ terms }} ».",
+    "results_for_html": {
+      "one": "{{ count }} résultat pour « {{ terms }} »",
+      "other": "{{ count }} résultats pour « {{ terms }} »"
+    },
+    "other_results": "Pages et articles"
   }
 }

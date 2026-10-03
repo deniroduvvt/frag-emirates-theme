@@ -1,0 +1,47 @@
+{% doc %}
+  Pagination accessible (précédent, numéros, suivant) aux couleurs du thème.
+  À appeler dans un bloc {% paginate %}.
+
+  @param {object} paginate - L'objet paginate
+  @param {string} [anchor] - Ancre ajoutée aux liens (ex. 'comments')
+
+  @example
+  {% render 'pagination', paginate: paginate %}
+{% enddoc %}
+{%- if paginate.pages > 1 -%}
+  {%- liquid
+    assign suffix = ''
+    if anchor
+      assign suffix = '#' | append: anchor
+    endif
+  -%}
+  <nav aria-label="{{ 'sections.pagination' | t }}">
+    <ul class="pagination" role="list">
+      {%- if paginate.previous -%}
+        <li>
+          <a href="{{ paginate.previous.url }}{{ suffix }}" aria-label="{{ 'sections.previous_page' | t }}">
+            {% render 'icon', name: 'chevron-left', size: 16 %}
+          </a>
+        </li>
+      {%- endif -%}
+      {%- for part in paginate.parts -%}
+        <li>
+          {%- if part.is_link -%}
+            <a href="{{ part.url }}{{ suffix }}" aria-label="{{ 'sections.page' | t: number: part.title }}">{{ part.title }}</a>
+          {%- elsif part.title == paginate.current_page -%}
+            <span aria-current="page" aria-label="{{ 'sections.page' | t: number: part.title }}">{{ part.title }}</span>
+          {%- else -%}
+            <span>{{ part.title }}</span>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+      {%- if paginate.next -%}
+        <li>
+          <a href="{{ paginate.next.url }}{{ suffix }}" aria-label="{{ 'sections.next_page' | t }}">
+            {% render 'icon', name: 'chevron-right', size: 16 %}
+          </a>
+        </li>
+      {%- endif -%}
+    </ul>
+  </nav>
+{%- endif -%}
