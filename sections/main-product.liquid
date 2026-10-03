@@ -16,9 +16,23 @@
   assign parent_collection = section.settings.collection
   assign media_count = product.media.size
   assign current_media = variant.featured_media | default: product.featured_media
+  case section.settings.media_ratio
+    when 'square'
+      assign media_ratio = '1 / 1'
+    when 'mockup'
+      assign media_ratio = '560 / 760'
+    when 'original'
+      assign media_ratio = product.featured_media.aspect_ratio | default: 0.75
+    else
+      assign media_ratio = '3 / 4'
+  endcase
 -%}
 
-<div class="main-product full-width" data-section-id="{{ section.id }}">
+<div
+  class="main-product full-width"
+  data-section-id="{{ section.id }}"
+  style="--media-ratio: {{ media_ratio }}; --gallery-width: {{ section.settings.gallery_width }}px;"
+>
   <nav class="product-breadcrumb" aria-label="{{ 'collections.breadcrumb' | t }}">
     <a href="{{ routes.root_url }}">{{ 'collections.home' | t }}</a>
     <span aria-hidden="true">›</span>
@@ -296,7 +310,8 @@
 
   .product-gallery__main {
     position: relative;
-    height: 460px;
+    aspect-ratio: var(--media-ratio);
+    max-height: 460px;
     overflow: hidden;
     background-color: var(--color-deep);
   }
@@ -492,14 +507,14 @@
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    height: 52px;
+    height: 48px;
     border: 1px solid var(--color-line-strong);
     border-radius: var(--radius-sm);
   }
 
   .quantity__button {
     width: var(--tap-target);
-    height: 50px;
+    height: 46px;
     border: none;
     background: transparent;
     font-size: 20px;
@@ -529,7 +544,7 @@
 
   .product-buy__submit {
     flex-grow: 1;
-    min-height: 52px;
+    min-height: 48px;
     padding: 0 var(--space-4);
     font-size: var(--type-label-size);
   }
@@ -622,14 +637,14 @@
 
     .product-gallery {
       flex-direction: row-reverse;
-      flex: 0 1 672px;
+      flex: 0 1 auto;
       gap: var(--space-4);
     }
 
     .product-gallery__main {
-      flex: 1 1 auto;
-      height: auto;
-      aspect-ratio: 560 / 760;
+      flex: 0 1 auto;
+      width: min(var(--gallery-width), 40vw);
+      max-height: none;
     }
 
     .product-gallery__thumbs {
@@ -780,6 +795,33 @@
 {
   "name": "Fiche parfum",
   "settings": [
+    {
+      "type": "header",
+      "content": "Photo"
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "Format de la photo",
+      "options": [
+        { "value": "portrait", "label": "Portrait 3:4" },
+        { "value": "square", "label": "Carré" },
+        { "value": "mockup", "label": "Maquette (560 × 760)" },
+        { "value": "original", "label": "Format d'origine de la photo" }
+      ],
+      "default": "portrait",
+      "info": "La photo est recadrée pour remplir ce format."
+    },
+    {
+      "type": "range",
+      "id": "gallery_width",
+      "label": "Largeur de la photo (desktop)",
+      "min": 360,
+      "max": 560,
+      "step": 20,
+      "unit": "px",
+      "default": 460
+    },
     {
       "type": "collection",
       "id": "collection",
