@@ -15,8 +15,9 @@
 # Design sources (mockups, tokens, images, logo, handoff) - never pushed to Shopify
 _design/**
 
-# Claude Code instructions - local only
+# Claude Code instructions and project tracking - local only
 CLAUDE.md
+SUIVI.md
 
 # Seed scripts for dev store test data (Admin API) - local only
 _seed/**
