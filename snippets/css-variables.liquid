@@ -1,18 +1,142 @@
+{% doc %}
+  Déclare les polices auto-hébergées et les tokens de design (_design/design-tokens.json)
+  sous forme de variables CSS. Seule source des couleurs, typographies, espacements,
+  rayons et ombres du thème.
+
+  @example
+  {% render 'css-variables' %}
+{% enddoc %}
 {% style %}
-  {% # Loads all font variantions with display: swap %}
-  {{ settings.type_primary_font | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'weight', 'bold' | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
-  {{ settings.type_primary_font | font_modify: 'style', 'italic' | font_face: font_display: 'swap' }}
+  @font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 500 600;
+    font-display: swap;
+    src: url('{{ 'cormorant-garamond.woff2' | asset_url }}') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('{{ 'cormorant-garamond-italic.woff2' | asset_url }}') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 300 500;
+    font-display: swap;
+    src: url('{{ 'jost.woff2' | asset_url }}') format('woff2');
+  }
 
   :root {
-    --font-primary--family: {{ settings.type_primary_font.family }}, {{ settings.type_primary_font.fallback_families }};
-    --font-primary--style: {{ settings.type_primary_font.style }};
-    --font-primary--weight: {{ settings.type_primary_font.weight }};
-    --page-width: {{ settings.max_page_width }};
-    --page-margin: {{ settings.min_page_margin }}px;
-    --color-background: {{ settings.background_color }};
-    --color-foreground: {{ settings.foreground_color }};
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    /* Couleurs — thème « Ivoire » */
+    --color-surface: #faf5e8;
+    --color-surface-raised: #fffdf6;
+    --color-surface-sand: #f3ead0;
+    --color-line: #e6dac0;
+    --color-line-strong: #9a7c5e;
+    --color-ink: #4e2610;
+    --color-ink-muted: #735340;
+    --color-on-ink: #faf5e8;
+    --color-ink-hover: #3a1c0b;
+    --color-sand: #ead7a0;
+    --color-sand-hover: #e2cc8c;
+    --color-on-sand: var(--color-ink);
+    --color-sale: #8c2f1b;
+    --color-deep: #2b1508;
+    --color-deep-raised: #3b1f0e;
+    --color-line-deep: #4a2c18;
+    --color-line-deep-strong: #94735a;
+    --color-on-deep: #f5ecd8;
+    --color-on-deep-muted: #c9b48f;
+    --color-accent-on-deep: var(--color-sand);
+    --color-accent-on-deep-hover: #f2e3b8;
+    --color-link: var(--color-ink);
+
+    /* Familles */
+    --font-serif: 'Cormorant Garamond', 'Cormorant', Garamond, 'Times New Roman', serif;
+    --font-sans: 'Jost', 'Futura', 'Avenir Next', system-ui, sans-serif;
+
+    /* Titres (serif) — tailles mobiles d'après les maquettes 390 px */
+    --type-display-xl-size: 40px;
+    --type-display-xl-line-height: 1.05;
+    --type-display-xl-weight: 500;
+    --type-display-xl-tracking: -0.01em;
+    --type-display-lg-size: 32px;
+    --type-display-lg-line-height: 1.1;
+    --type-display-lg-weight: 500;
+    --type-display-lg-tracking: -0.005em;
+    --type-display-md-size: 32px;
+    --type-display-md-line-height: 1.2;
+    --type-display-md-weight: 500;
+    --type-title-size: 20px;
+    --type-title-line-height: 1.2;
+    --type-title-weight: 600;
+    --type-price-size: 18px;
+    --type-price-line-height: 1.2;
+    --type-price-weight: 600;
+    --type-quote-size: 28px;
+    --type-quote-line-height: 1.35;
+    --type-quote-weight: 400;
+
+    /* Texte (sans) */
+    --type-lead-size: 17px;
+    --type-lead-line-height: 1.5;
+    --type-lead-weight: 300;
+    --type-body-size: 16px;
+    --type-body-line-height: 1.6;
+    --type-body-weight: 400;
+    --type-body-strong-line-height: 1.5;
+    --type-body-strong-weight: 500;
+    --type-caption-size: 14px;
+    --type-caption-line-height: 1.45;
+    --type-caption-weight: 400;
+    --type-label-size: 12px;
+    --type-label-line-height: 1.3;
+    --type-label-weight: 500;
+    --type-label-tracking: 0.14em;
+    --type-button-size: 13px;
+    --type-button-line-height: 1.2;
+    --type-button-weight: 500;
+    --type-button-tracking: 0.1em;
+
+    /* Espacements (base 8 px) */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-12: 48px;
+    --space-20: 80px;
+
+    /* Rayons */
+    --radius-none: 0;
+    --radius-sm: 2px;
+    --radius-full: 9999px;
+
+    /* Ombres */
+    --shadow-product: 3px 5px 30px 0 #4e261038;
+    --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-ink);
+    --focus-ring-deep: 0 0 0 2px var(--color-deep), 0 0 0 4px var(--color-sand);
+
+    /* Mise en page : maquettes 390 px (marges 20 px) et 1440 px (marges 80 px) */
+    --page-width: 1440px;
+    --page-margin: 20px;
+    --tap-target: 44px;
+  }
+
+  @media screen and (min-width: 750px) {
+    :root {
+      --type-display-xl-size: 64px;
+      --type-display-lg-size: 44px;
+      --type-title-size: 24px;
+      --type-price-size: 22px;
+      --type-lead-size: 20px;
+      --page-margin: var(--space-20);
+    }
   }
 {% endstyle %}
