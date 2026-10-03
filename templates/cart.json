@@ -10,8 +10,10 @@
 {
   "sections": {
     "main": {
-      "type": "cart",
-      "settings": {}
+      "type": "main-cart",
+      "settings": {
+        "continue_collection": "nos-parfums"
+      }
     }
   },
   "order": [

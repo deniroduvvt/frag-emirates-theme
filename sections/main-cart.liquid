@@ -1,0 +1,445 @@
+<div class="main-cart full-width" data-section-id="{{ section.id }}">
+  <div class="main-cart__inner">
+    <div class="main-cart__header">
+      <nav class="breadcrumb label" aria-label="{{ 'collections.breadcrumb' | t }}">
+        <a href="{{ routes.root_url }}">{{ 'collections.home' | t }}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{{ 'cart.title' | t }}</span>
+      </nav>
+      <h1 tabindex="-1">{{ 'cart.title' | t }}</h1>
+    </div>
+
+    <p class="visually-hidden" role="status" data-cart-status></p>
+
+    {%- if cart.item_count > 0 -%}
+      <form class="main-cart__layout" action="{{ routes.cart_url }}" method="post" id="CartForm" novalidate>
+        <ul class="cart-items" role="list">
+          {%- for item in cart.items -%}
+            {%- liquid
+              assign volume = ''
+              for option in item.product.options_with_values
+                if option.name == 'Contenance'
+                  assign volume = item.variant.options[forloop.index0]
+                endif
+              endfor
+            -%}
+            <li class="cart-item">
+              <a class="cart-item__media" href="{{ item.url }}" tabindex="-1" aria-hidden="true">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 240 | image_tag: loading: 'eager', alt: '' }}
+                {%- else -%}
+                  {% render 'icon', name: 'bottle', size: 40 %}
+                {%- endif -%}
+              </a>
+
+              <div class="cart-item__details">
+                <p class="cart-item__vendor">{{ item.vendor | escape }}</p>
+                <h2 class="cart-item__title">
+                  <a href="{{ item.url }}">{{ item.product.title | escape }}</a>
+                </h2>
+                {%- if volume != blank -%}
+                  <p class="cart-item__volume label">{{ volume | escape }}</p>
+                {%- endif -%}
+                {%- for discount in item.line_level_discount_allocations -%}
+                  <p class="cart-item__discount">{{ discount.discount_application.title | escape }} (−{{ discount.amount | money }})</p>
+                {%- endfor -%}
+              </div>
+
+              <div class="cart-item__actions">
+                <div class="quantity">
+                  <button class="quantity__button" type="button" aria-label="{{ 'products.decrease' | t }}" data-quantity="-1">−</button>
+                  <label class="visually-hidden" for="Quantity-{{ item.key }}">
+                    {{- 'cart.quantity_for' | t: title: item.product.title -}}
+                  </label>
+                  <input
+                    class="quantity__input"
+                    id="Quantity-{{ item.key }}"
+                    type="number"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    max="99"
+                    inputmode="numeric"
+                    data-line="{{ forloop.index }}"
+                  >
+                  <button class="quantity__button" type="button" aria-label="{{ 'products.increase' | t }}" data-quantity="1">+</button>
+                </div>
+                <a class="cart-item__remove" href="{{ item.url_to_remove }}" data-remove="{{ forloop.index }}">
+                  {{- 'cart.remove' | t -}}
+                  <span class="visually-hidden">{{ item.product.title | escape }}</span>
+                </a>
+              </div>
+
+              <div class="cart-item__price">
+                {%- if item.original_line_price > item.final_line_price -%}
+                  <s class="cart-item__compare">{{ item.original_line_price | money }}</s>
+                {%- endif -%}
+                <span class="price">{{ item.final_line_price | money }}</span>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <aside class="cart-summary" aria-labelledby="CartSummary-{{ section.id }}">
+          <h2 class="cart-summary__title label" id="CartSummary-{{ section.id }}">{{ 'cart.summary' | t }}</h2>
+
+          {%- for discount in cart.cart_level_discount_applications -%}
+            <p class="cart-summary__row">
+              <span>{{ discount.title | escape }}</span>
+              <span>−{{ discount.total_allocated_amount | money }}</span>
+            </p>
+          {%- endfor -%}
+
+          <p class="cart-summary__row cart-summary__total">
+            <span>{{ 'cart.subtotal' | t }}</span>
+            <span class="price">{{ cart.total_price | money }}</span>
+          </p>
+
+          <p class="cart-summary__note">
+            {%- if cart.taxes_included -%}
+              {{ 'cart.taxes_included' | t }}
+            {%- else -%}
+              {{ 'cart.taxes_excluded' | t }}
+            {%- endif -%}
+          </p>
+
+          <noscript>
+            <button class="button button--ghost cart-summary__update" type="submit" name="update">{{ 'cart.update' | t }}</button>
+          </noscript>
+          <button class="button cart-summary__checkout" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+        </aside>
+      </form>
+    {%- else -%}
+      <div class="main-cart__empty">
+        <p>{{ 'cart.empty' | t }}</p>
+        <a class="button" href="{{ section.settings.continue_collection.url | default: routes.all_products_collection_url }}">
+          {{- 'cart.continue' | t -}}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <script type="application/json" data-cart-labels>
+    {
+      "updating": {{ 'cart.updating' | t | json }},
+      "error": {{ 'cart.error' | t | json }}
+    }
+  </script>
+</div>
+
+{% stylesheet %}
+  .main-cart__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--space-6) 20px var(--space-12);
+  }
+
+  .main-cart__header {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .main-cart__layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .main-cart[aria-busy='true'] .main-cart__layout {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    border-top: 1px solid var(--color-line);
+    list-style: none;
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'media details price'
+      'media actions actions';
+    gap: var(--space-3) var(--space-4);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .cart-item__media {
+    display: flex;
+    grid-area: media;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: var(--color-surface-sand);
+    color: var(--color-line-strong);
+  }
+
+  .cart-item__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cart-item__details {
+    display: flex;
+    flex-direction: column;
+    grid-area: details;
+    gap: var(--space-1);
+    min-width: 0;
+  }
+
+  .cart-item__vendor {
+    font-size: 13px;
+    color: var(--color-ink-muted);
+  }
+
+  .cart-item__title {
+    font-size: var(--type-title-size);
+    line-height: var(--type-title-line-height);
+    font-weight: var(--type-title-weight);
+    letter-spacing: normal;
+  }
+
+  .cart-item__title a {
+    text-decoration: none;
+  }
+
+  .cart-item__title a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--color-sand);
+  }
+
+  .cart-item__volume {
+    font-size: 11px;
+    color: var(--color-ink-muted);
+  }
+
+  .cart-item__discount {
+    font-size: var(--type-caption-size);
+    color: var(--color-sale);
+  }
+
+  .cart-item__actions {
+    display: flex;
+    grid-area: actions;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .cart-item__remove {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap-target);
+    font-size: var(--type-caption-size);
+    color: var(--color-ink-muted);
+  }
+
+  .cart-item__price {
+    display: flex;
+    flex-direction: column;
+    grid-area: price;
+    align-items: flex-end;
+    gap: var(--space-1);
+    white-space: nowrap;
+  }
+
+  .cart-item__compare {
+    font-size: var(--type-caption-size);
+    color: var(--color-ink-muted);
+  }
+
+  .cart-summary {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: var(--space-6) 20px;
+    background-color: var(--color-surface-sand);
+  }
+
+  .cart-summary__title {
+    font-family: var(--font-sans);
+    color: var(--color-ink-muted);
+  }
+
+  .cart-summary__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .cart-summary__total {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .cart-summary__note {
+    font-size: var(--type-caption-size);
+    line-height: var(--type-caption-line-height);
+    color: var(--color-ink-muted);
+  }
+
+  .cart-summary__checkout,
+  .cart-summary__update {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .main-cart__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+    padding-bottom: var(--space-12);
+  }
+
+  @media screen and (min-width: 750px) {
+    .main-cart__inner {
+      gap: var(--space-8);
+      padding: var(--space-12) var(--page-margin) var(--space-20);
+    }
+
+    .main-cart__header {
+      gap: var(--space-6);
+    }
+
+    .cart-item {
+      grid-template-columns: 120px minmax(0, 1fr) auto auto;
+      grid-template-areas: 'media details actions price';
+      align-items: center;
+      gap: var(--space-6);
+      padding: var(--space-6) 0;
+    }
+
+    .cart-item__vendor {
+      font-size: var(--type-caption-size);
+    }
+
+    .cart-item__volume {
+      font-size: var(--type-label-size);
+    }
+
+    .cart-item__price {
+      min-width: 110px;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .main-cart__layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      align-items: start;
+      gap: var(--space-12);
+    }
+
+    .cart-summary {
+      position: sticky;
+      top: var(--space-6);
+      padding: var(--space-8);
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const root = document.querySelector('.main-cart');
+    if (!root) return;
+
+    const sectionId = root.dataset.sectionId;
+    const labels = JSON.parse(root.querySelector('[data-cart-labels]')?.textContent || '{}');
+    let controller = null;
+
+    const announce = (message) => {
+      const status = document.querySelector('[data-cart-status]');
+      if (status) status.textContent = message;
+    };
+
+    /* Met à jour une ligne puis remplace la section par sa version à jour */
+    const changeLine = async (line, quantity, focusSelector) => {
+      controller?.abort();
+      controller = new AbortController();
+      const current = document.querySelector('.main-cart');
+      current.setAttribute('aria-busy', 'true');
+      announce(labels.updating);
+
+      const headerSection = document.querySelector('.site-header')?.closest('.shopify-section');
+      const headerId = headerSection?.id.replace('shopify-section-', '');
+      const sections = headerId ? [sectionId, headerId] : [sectionId];
+
+      try {
+        const response = await fetch(`${window.Shopify?.routes?.root || '/'}cart/change.js`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ line, quantity, sections, sections_url: window.location.pathname }),
+          signal: controller.signal
+        });
+        if (!response.ok) throw new Error(response.statusText);
+        const data = await response.json();
+        const html = new DOMParser().parseFromString(data.sections[sectionId], 'text/html');
+        const next = html.querySelector('.main-cart');
+        current.replaceWith(next);
+        bind(next);
+        next.querySelector(focusSelector)?.focus();
+
+        /* Libellé du lien panier de l'en-tête (nombre d'articles) */
+        if (headerId && data.sections[headerId]) {
+          const headerHtml = new DOMParser().parseFromString(data.sections[headerId], 'text/html');
+          const freshLink = headerHtml.querySelector('.site-header a[href$="/cart"]');
+          const cartLink = document.querySelector('.site-header a[href$="/cart"]');
+          if (freshLink && cartLink) cartLink.setAttribute('aria-label', freshLink.getAttribute('aria-label'));
+        }
+      } catch (error) {
+        if (error.name === 'AbortError') return;
+        current.removeAttribute('aria-busy');
+        announce(labels.error);
+      }
+    };
+
+    const bind = (section) => {
+      section.querySelectorAll('.cart-item .quantity').forEach((wrapper) => {
+        const input = wrapper.querySelector('input');
+        const line = Number(input.dataset.line);
+        wrapper.querySelectorAll('[data-quantity]').forEach((button) => {
+          button.addEventListener('click', () => {
+            const next = Math.min(Math.max((Number(input.value) || 0) + Number(button.dataset.quantity), 0), 99);
+            input.value = next;
+            changeLine(line, next, `#${CSS.escape(input.id)}`);
+          });
+        });
+        input.addEventListener('change', () => changeLine(line, Math.max(Number(input.value) || 0, 0), `#${CSS.escape(input.id)}`));
+      });
+
+      section.querySelectorAll('[data-remove]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          changeLine(Number(link.dataset.remove), 0, '.main-cart h1');
+        });
+      });
+    };
+
+    bind(root);
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Panier",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "continue_collection",
+      "label": "Collection du bouton « Découvrir nos parfums »"
+    }
+  ]
+}
+{% endschema %}

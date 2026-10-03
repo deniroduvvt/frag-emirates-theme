@@ -20,7 +20,17 @@
     "checkout": "Paiement",
     "title": "Panier",
     "update": "Mettre à jour",
-    "remove": "Supprimer"
+    "remove": "Supprimer",
+    "remove_item": "Supprimer {{ title }}",
+    "quantity_for": "Quantité pour {{ title }}",
+    "empty": "Votre panier est vide.",
+    "continue": "Découvrir nos parfums",
+    "summary": "Récapitulatif",
+    "subtotal": "Sous-total",
+    "taxes_included": "TVA incluse. Frais de livraison calculés lors du paiement.",
+    "taxes_excluded": "Taxes et frais de livraison calculés lors du paiement.",
+    "updating": "Mise à jour du panier…",
+    "error": "Le panier n'a pas pu être mis à jour. Veuillez réessayer."
   },
   "contact": {
     "form_title": "Votre message",
