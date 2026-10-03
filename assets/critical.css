@@ -265,6 +265,31 @@ a:hover {
   background-color: var(--color-accent-on-deep-hover);
 }
 
+/* Fil d'Ariane en capitales (catalogue, contact) */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--color-ink-muted);
+}
+
+.breadcrumb a {
+  color: var(--color-ink-muted);
+  text-underline-offset: 6px;
+}
+
+.breadcrumb [aria-current] {
+  color: var(--color-ink);
+}
+
+@media screen and (min-width: 750px) {
+  .breadcrumb {
+    gap: var(--space-3);
+    font-size: var(--type-label-size);
+  }
+}
+
 /* Contenu principal : pousse le pied de page en bas des pages courtes */
 main {
   flex-grow: 1;

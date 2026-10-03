@@ -22,6 +22,31 @@
     "update": "Mettre à jour",
     "remove": "Supprimer"
   },
+  "contact": {
+    "form_title": "Votre message",
+    "required": "Champ obligatoire",
+    "required_short": "Obligatoire",
+    "first_name": "Prénom",
+    "last_name": "Nom",
+    "email": "Adresse e-mail",
+    "phone": "Téléphone",
+    "contact_preference": "Comment préférez-vous être recontacté ?",
+    "contact_preference_short": "Être recontacté par",
+    "by_email": "E-mail",
+    "by_phone": "Téléphone",
+    "by_whatsapp": "WhatsApp",
+    "subject": "Sujet",
+    "subject_placeholder": "Choisir un sujet",
+    "subject_advice": "Conseil sur un parfum",
+    "subject_order": "Suivi de commande",
+    "subject_shipping": "Livraison et retours",
+    "subject_other": "Autre demande",
+    "message": "Message",
+    "message_placeholder": "Dites-nous tout : le parfum qui vous intéresse, votre numéro de commande…",
+    "email_placeholder": "vous@exemple.fr",
+    "phone_placeholder": "06 00 00 00 00",
+    "send": "Envoyer"
+  },
   "customers": {
     "login": {
       "email": "E-mail",

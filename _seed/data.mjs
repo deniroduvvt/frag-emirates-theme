@@ -45,6 +45,11 @@ export const PRODUCTS = [
     variants: [['100 ml', '79.00']] }
 ].map((p) => ({ ...p, description: DESCRIPTION }));
 
+// Pages existantes à mettre à jour (titre, modèle du thème)
+export const PAGE_UPDATES = [
+  { handle: 'contact', title: 'Nous contacter', templateSuffix: 'contact' }
+];
+
 // Pages liées depuis le pied de page (contenu à compléter). « contact » existe déjà dans la boutique.
 export const PAGES = [
   { handle: 'commandes', title: 'Commandes' },

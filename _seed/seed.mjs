@@ -7,7 +7,7 @@ import { mkdtempSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { STORE, API_VERSION, ONLINE_STORE_PUBLICATION, DEFINITIONS, PRODUCTS, COLLECTIONS, PAGES, MENUS } from './data.mjs';
+import { STORE, API_VERSION, ONLINE_STORE_PUBLICATION, DEFINITIONS, PRODUCTS, COLLECTIONS, PAGES, PAGE_UPDATES, MENUS } from './data.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGES = join(ROOT, '_design', 'images');
@@ -162,6 +162,18 @@ async function navigation() {
     check(`Page ${p.handle}`, r.pageCreate);
     pageIds[p.handle] = r.pageCreate.page.id;
     console.log(`+ page ${p.title}`);
+  }
+
+  for (const u of PAGE_UPDATES) {
+    if (!pageIds[u.handle]) throw new Error(`Page ${u.handle} introuvable`);
+    const r = gql(`mutation UpdatePage($id: ID!, $page: PageUpdateInput!) {
+      pageUpdate(id: $id, page: $page) {
+        page { id title handle templateSuffix }
+        userErrors { field message code }
+      }
+    }`, { id: pageIds[u.handle], page: { title: u.title, templateSuffix: u.templateSuffix } });
+    check(`Page ${u.handle}`, r.pageUpdate);
+    console.log(`~ page ${r.pageUpdate.page.title} (modèle page.${r.pageUpdate.page.templateSuffix})`);
   }
 
   for (const m of MENUS) {

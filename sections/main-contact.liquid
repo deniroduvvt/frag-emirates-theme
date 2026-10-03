@@ -1,0 +1,525 @@
+{%- liquid
+  assign title_id = 'ContactTitle-' | append: section.id
+  assign privacy_url = section.settings.privacy_page.url
+-%}
+{%- comment -%} Formulaire de contact Shopify : envoyé par e-mail à l'adresse de la boutique. {%- endcomment -%}
+
+<div class="main-contact full-width">
+  <div class="contact-intro">
+    <div class="contact-intro__inner">
+      <div class="contact-intro__heading">
+        <nav class="breadcrumb label" aria-label="{{ 'collections.breadcrumb' | t }}">
+          <a href="{{ routes.root_url }}">{{ 'collections.home' | t }}</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{{ page.title | escape }}</span>
+        </nav>
+        <h1 class="contact-intro__title">{{ page.title | escape }}</h1>
+      </div>
+
+      <div class="contact-intro__text">
+        {%- if section.settings.intro != blank -%}
+          <p class="contact-intro__lead">{{ section.settings.intro }}</p>
+        {%- endif -%}
+        <div class="contact-intro__details">
+          {%- if section.settings.hours != blank -%}
+            <span>{{ section.settings.hours }}</span>
+          {%- endif -%}
+          {%- if section.settings.email_line != blank -%}
+            <span>{{ section.settings.email_line }}</span>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form-wrap">
+    {%- form 'contact', id: 'ContactForm', class: 'contact-form' -%}
+      <div class="contact-form__header">
+        <h2 class="contact-form__title" id="{{ title_id }}">{{ 'contact.form_title' | t }}</h2>
+        <p class="contact-form__required">
+          <span class="contact-form__star" aria-hidden="true">*</span>
+          <span class="contact-form__desktop">{{ 'contact.required' | t }}</span>
+          <span class="contact-form__mobile">{{ 'contact.required_short' | t }}</span>
+        </p>
+      </div>
+
+      {%- if form.posted_successfully? -%}
+        <p class="contact-form__status" role="status">{{ section.settings.success_message }}</p>
+      {%- elsif form.errors -%}
+        <div class="contact-form__status contact-form__status--error" role="alert" id="ContactFormErrors">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      <div class="contact-form__row">
+        <div class="contact-field">
+          <label class="contact-field__label" for="ContactFirstName">{{ 'contact.first_name' | t }}</label>
+          <input class="contact-field__input" id="ContactFirstName" type="text" name="contact[Prénom]" autocomplete="given-name">
+        </div>
+        <div class="contact-field">
+          <label class="contact-field__label" for="ContactLastName">{{ 'contact.last_name' | t }}</label>
+          <input class="contact-field__input" id="ContactLastName" type="text" name="contact[Nom]" autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="contact-form__row contact-form__row--stack-mobile">
+        <div class="contact-field">
+          <label class="contact-field__label" for="ContactEmail">
+            {{- 'contact.email' | t }} <span class="contact-form__star" aria-hidden="true">*</span>
+          </label>
+          <input
+            class="contact-field__input"
+            id="ContactEmail"
+            type="email"
+            name="contact[email]"
+            required
+            aria-required="true"
+            autocomplete="email"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="{{ 'contact.email_placeholder' | t }}"
+            value="{{ form.email | escape }}"
+            {% if form.errors contains 'email' %}
+              aria-invalid="true" aria-describedby="ContactFormErrors"
+            {% endif %}
+          >
+        </div>
+        <div class="contact-field">
+          <label class="contact-field__label" for="ContactPhone">{{ 'contact.phone' | t }}</label>
+          <input
+            class="contact-field__input"
+            id="ContactPhone"
+            type="tel"
+            name="contact[Téléphone]"
+            autocomplete="tel"
+            placeholder="{{ 'contact.phone_placeholder' | t }}"
+          >
+        </div>
+      </div>
+
+      <fieldset class="contact-form__fieldset">
+        <legend class="contact-field__label">
+          <span class="contact-form__desktop">{{ 'contact.contact_preference' | t }}</span>
+          <span class="contact-form__mobile">{{ 'contact.contact_preference_short' | t }}</span>
+        </legend>
+        <div class="contact-form__options">
+          <label class="contact-option">
+            <input type="checkbox" name="contact[Recontact par e-mail]" value="Oui">
+            {{- 'contact.by_email' | t -}}
+          </label>
+          <label class="contact-option">
+            <input type="checkbox" name="contact[Recontact par téléphone]" value="Oui">
+            {{- 'contact.by_phone' | t -}}
+          </label>
+          <label class="contact-option">
+            <input type="checkbox" name="contact[Recontact par WhatsApp]" value="Oui">
+            {{- 'contact.by_whatsapp' | t -}}
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="contact-field">
+        <label class="contact-field__label" for="ContactSubject">{{ 'contact.subject' | t }}</label>
+        <select class="contact-field__input contact-field__select" id="ContactSubject" name="contact[Sujet]">
+          <option value="">{{ 'contact.subject_placeholder' | t }}</option>
+          <option>{{ 'contact.subject_advice' | t }}</option>
+          <option>{{ 'contact.subject_order' | t }}</option>
+          <option>{{ 'contact.subject_shipping' | t }}</option>
+          <option>{{ 'contact.subject_other' | t }}</option>
+        </select>
+      </div>
+
+      <div class="contact-field">
+        <label class="contact-field__label" for="ContactMessage">
+          {{- 'contact.message' | t }} <span class="contact-form__star" aria-hidden="true">*</span>
+        </label>
+        <textarea
+          class="contact-field__input contact-field__textarea"
+          id="ContactMessage"
+          name="contact[body]"
+          rows="7"
+          required
+          aria-required="true"
+          placeholder="{{ 'contact.message_placeholder' | t }}"
+        >
+          {{- form.body -}}
+        </textarea>
+      </div>
+
+      <div class="contact-form__footer">
+        <button class="button contact-form__submit" type="submit">{{ 'contact.send' | t }}</button>
+        {%- if section.settings.privacy_text != blank -%}
+          <p class="contact-form__privacy">
+            {{ section.settings.privacy_text }}
+            {%- if privacy_url != blank %}
+              <a href="{{ privacy_url }}">{{ section.settings.privacy_link_label }}</a>.
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .contact-intro {
+    background-color: var(--color-surface-sand);
+  }
+
+  .contact-intro__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--space-6) 20px 28px;
+  }
+
+  .contact-intro__heading {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .contact-intro__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .contact-intro__lead {
+    line-height: 1.55;
+  }
+
+  .contact-intro__details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    font-size: var(--type-caption-size);
+    line-height: var(--type-caption-line-height);
+    color: var(--color-ink-muted);
+  }
+
+  .contact-form-wrap {
+    padding: 36px 20px var(--space-12);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .contact-form__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .contact-form__title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  .contact-form__required {
+    font-size: var(--type-label-size);
+    color: var(--color-ink-muted);
+  }
+
+  .contact-form__star {
+    color: var(--color-sale);
+  }
+
+  .contact-form__desktop {
+    display: none;
+  }
+
+  .contact-form__status {
+    padding: var(--space-4);
+    border-left: 2px solid var(--color-ink);
+    background-color: var(--color-surface-sand);
+  }
+
+  .contact-form__status--error {
+    border-left-color: var(--color-sale);
+  }
+
+  .contact-form__status ul {
+    padding-left: var(--space-4);
+  }
+
+  .contact-form__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .contact-form__row--stack-mobile {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .contact-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .contact-field__label {
+    font-size: 11px;
+    font-weight: var(--type-label-weight);
+    letter-spacing: var(--type-label-tracking);
+    text-transform: uppercase;
+  }
+
+  .contact-field__input {
+    width: 100%;
+    height: 52px;
+    padding: 0 var(--space-4);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface-raised);
+    font-size: 16px;
+    color: var(--color-ink);
+  }
+
+  .contact-field__input::placeholder {
+    color: var(--color-ink-muted);
+    opacity: 1;
+  }
+
+  .contact-field__select {
+    cursor: pointer;
+  }
+
+  .contact-field__textarea {
+    height: 200px;
+    padding: var(--space-4);
+    line-height: var(--type-body-line-height);
+    resize: vertical;
+  }
+
+  .contact-form__fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+  .contact-form__fieldset legend {
+    margin-bottom: 6px;
+    padding: 0;
+  }
+
+  .contact-form__options {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+  }
+
+  .contact-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: var(--tap-target);
+    font-size: 13px;
+    font-weight: var(--type-label-weight);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .contact-option input {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: var(--color-ink);
+  }
+
+  .contact-form__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4);
+    margin-top: var(--space-1);
+  }
+
+  .contact-form__submit {
+    min-height: 56px;
+    letter-spacing: var(--type-label-tracking);
+  }
+
+  .contact-form__privacy {
+    font-size: 13px;
+    line-height: var(--type-caption-line-height);
+    color: var(--color-ink-muted);
+  }
+
+  .contact-form__privacy a {
+    color: var(--color-ink-muted);
+  }
+
+  @media screen and (min-width: 750px) {
+    .contact-intro__inner {
+      flex-direction: row;
+      align-items: flex-end;
+      gap: var(--space-20);
+      max-width: calc(1120px + var(--page-margin) * 2);
+      padding: 40px var(--page-margin) var(--space-12);
+    }
+
+    .contact-intro__heading {
+      flex: 0 0 400px;
+      gap: var(--space-4);
+    }
+
+    .contact-intro__title {
+      font-size: 56px;
+    }
+
+    .contact-intro__text {
+      flex-grow: 1;
+      padding-bottom: 6px;
+    }
+
+    .contact-intro__lead {
+      font-size: 17px;
+      line-height: var(--type-body-line-height);
+    }
+
+    .contact-intro__details {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--space-1) var(--space-8);
+    }
+
+    .contact-form-wrap {
+      padding: var(--space-20) var(--page-margin);
+    }
+
+    .contact-form {
+      gap: var(--space-8);
+    }
+
+    .contact-form__title {
+      font-size: var(--type-display-md-size);
+    }
+
+    .contact-form__required {
+      font-size: var(--type-caption-size);
+    }
+
+    .contact-form__desktop {
+      display: inline;
+    }
+
+    .contact-form__mobile {
+      display: none;
+    }
+
+    .contact-form__row,
+    .contact-form__row--stack-mobile {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-6);
+    }
+
+    .contact-field {
+      gap: 10px;
+    }
+
+    .contact-field__label {
+      font-size: var(--type-label-size);
+    }
+
+    .contact-field__input {
+      height: 56px;
+      padding: 0 20px;
+    }
+
+    .contact-field__textarea {
+      height: 200px;
+      padding: var(--space-4) 20px;
+    }
+
+    .contact-form__fieldset legend {
+      margin-bottom: 10px;
+    }
+
+    .contact-form__options {
+      column-gap: 40px;
+    }
+
+    .contact-option {
+      gap: var(--space-3);
+      font-size: var(--type-caption-size);
+    }
+
+    .contact-form__footer {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-6);
+      margin-top: var(--space-2);
+    }
+
+    .contact-form__submit {
+      padding: 0 var(--space-12);
+    }
+
+    .contact-form__privacy {
+      max-width: 420px;
+      font-size: var(--type-caption-size);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Page Contact",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "Une question sur un parfum, une commande ou une livraison ? Écrivez-nous ci-dessous, ou joignez-nous au [numéro de téléphone] et sur WhatsApp."
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Horaires du service client",
+      "default": "Service client : [jours] · [horaires], hors jours fériés"
+    },
+    {
+      "type": "text",
+      "id": "email_line",
+      "label": "E-mail et délai de réponse",
+      "default": "[adresse e-mail] · réponse sous [délai]"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Message après envoi",
+      "default": "[Message de confirmation d'envoi]"
+    },
+    {
+      "type": "text",
+      "id": "privacy_text",
+      "label": "Mention sous le bouton",
+      "default": "Vos informations servent uniquement à vous répondre. Voir notre"
+    },
+    {
+      "type": "text",
+      "id": "privacy_link_label",
+      "label": "Texte du lien",
+      "default": "politique de confidentialité"
+    },
+    {
+      "type": "page",
+      "id": "privacy_page",
+      "label": "Page de confidentialité"
+    }
+  ]
+}
+{% endschema %}
