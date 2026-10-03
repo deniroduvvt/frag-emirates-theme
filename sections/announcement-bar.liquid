@@ -1,0 +1,75 @@
+<div class="announcement-bar color-deep full-width">
+  <p class="announcement-bar__desktop label">
+    <span>{{ section.settings.message_1 }}</span>
+    {%- if section.settings.message_1 != blank and section.settings.message_2 != blank -%}
+      <span class="announcement-bar__separator" aria-hidden="true">·</span>
+    {%- endif -%}
+    <span>{{ section.settings.message_2 }}</span>
+  </p>
+  <p class="announcement-bar__mobile label">{{ section.settings.message_mobile }}</p>
+</div>
+
+{% stylesheet %}
+  .announcement-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px;
+    padding: 0 var(--page-margin);
+    text-align: center;
+  }
+
+  .announcement-bar p {
+    font-size: 10px;
+  }
+
+  .announcement-bar__desktop {
+    display: none;
+  }
+
+  .announcement-bar__separator {
+    color: var(--color-line-deep-strong);
+  }
+
+  @media screen and (min-width: 750px) {
+    .announcement-bar {
+      min-height: 40px;
+    }
+
+    .announcement-bar .announcement-bar__desktop {
+      display: flex;
+      gap: var(--space-6);
+      font-size: var(--type-label-size);
+    }
+
+    .announcement-bar__mobile {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bandeau d'annonce",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message_1",
+      "label": "Message 1 (desktop)",
+      "default": "Parfumerie du Moyen-Orient"
+    },
+    {
+      "type": "text",
+      "id": "message_2",
+      "label": "Message 2 (desktop)",
+      "default": "Une sélection resserrée, uniquement des maisons de qualité"
+    },
+    {
+      "type": "text",
+      "id": "message_mobile",
+      "label": "Message (mobile)",
+      "default": "Une sélection resserrée de maisons de qualité"
+    }
+  ]
+}
+{% endschema %}

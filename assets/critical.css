@@ -265,6 +265,29 @@ a:hover {
   background-color: var(--color-accent-on-deep-hover);
 }
 
+/* Contenu principal : pousse le pied de page en bas des pages courtes */
+main {
+  flex-grow: 1;
+}
+
+main:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Lien d'évitement : visible uniquement au focus clavier */
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 100;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
 /* Masqué visuellement, lu par les lecteurs d'écran */
 .visually-hidden {
   position: absolute !important;

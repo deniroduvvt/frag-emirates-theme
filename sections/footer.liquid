@@ -1,56 +1,542 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
+{%- liquid
+  assign payment_methods = section.settings.payment_methods | split: ','
+  assign socials = 'instagram,youtube,tiktok,linkedin' | split: ','
+-%}
+
+<footer class="site-footer full-width">
+  <div class="site-footer__main">
+    {%- for menu_key in (1..2) -%}
+      {%- liquid
+        if menu_key == 1
+          assign menu = section.settings.menu_services
+          assign heading = section.settings.heading_services
+          assign heading_mobile = section.settings.heading_services_mobile
+        else
+          assign menu = section.settings.menu_legal
+          assign heading = section.settings.heading_legal
+          assign heading_mobile = section.settings.heading_legal_mobile
+        endif
+      -%}
+      <div class="site-footer__column site-footer__column--menu">
+        <h2 class="site-footer__heading label">
+          <span class="site-footer__desktop">{{ heading }}</span>
+          <span class="site-footer__mobile">{{ heading_mobile | default: heading }}</span>
+        </h2>
+        {%- if menu.links.size > 0 -%}
+          <ul class="site-footer__links" role="list">
+            {%- for link in menu.links -%}
+              <li>
+                <a
+                  href="{{ link.url }}"
+                  {% if link.current %}
+                    aria-current="page"
+                  {% endif %}
+                >
+                  {{- link.title | escape -}}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+
+    <div class="site-footer__column site-footer__newsletter">
+      <h2 class="site-footer__heading label">{{ section.settings.newsletter_heading }}</h2>
+      <p class="site-footer__desktop">{{ section.settings.newsletter_text }}</p>
+      <p class="site-footer__mobile">{{ section.settings.newsletter_text_mobile | default: section.settings.newsletter_text }}</p>
+
+      {%- form 'customer', id: 'NewsletterForm', class: 'newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-form__field">
+          <label class="visually-hidden" for="NewsletterEmail">{{ 'footer.email' | t }}</label>
+          <input
+            class="newsletter-form__input"
+            id="NewsletterEmail"
+            type="email"
+            name="contact[email]"
+            placeholder="{{ 'footer.email' | t }}"
+            autocomplete="email"
+            autocapitalize="off"
+            spellcheck="false"
+            required
+            {% if form.errors %}
+              aria-invalid="true" aria-describedby="NewsletterMessage"
+            {% elsif form.posted_successfully? %}
+              aria-describedby="NewsletterMessage"
+            {% endif %}
+          >
+          <button class="newsletter-form__button" type="submit">{{ 'footer.subscribe' | t }}</button>
+        </div>
+        {%- if form.errors -%}
+          <div class="newsletter-form__message" id="NewsletterMessage" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- elsif form.posted_successfully? -%}
+          <p class="newsletter-form__message" id="NewsletterMessage" role="status">
+            {{ section.settings.newsletter_success }}
+          </p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
   </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+  <div class="site-footer__deep color-deep">
+    <div class="site-footer__deep-inner">
+      <div class="site-footer__row">
+        {%- capture social_links -%}
+          {%- for social in socials -%}
+            {%- assign setting_id = social | append: '_url' -%}
+            {%- assign social_url = section.settings[setting_id] -%}
+            {%- if social_url != blank -%}
+              <li>
+                <a class="site-footer__social" href="{{ social_url }}" target="_blank" rel="noopener">
+                  {% render 'icon', name: social, size: 24 %}
+                  <span class="visually-hidden">
+                    {%- case social -%}
+                      {%- when 'instagram' -%}
+                        Instagram
+                      {%- when 'youtube' -%}
+                        YouTube
+                      {%- when 'tiktok' -%}
+                        TikTok
+                      {%- when 'linkedin' -%}
+                        LinkedIn
+                    {%- endcase -%}
+                  </span>
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if social_links != blank -%}
+          <ul class="site-footer__socials" role="list" aria-label="{{ 'footer.social' | t }}">
+            {{ social_links }}
+          </ul>
+        {%- endif -%}
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+        {%- if section.settings.payment_methods != blank -%}
+          <ul class="site-footer__payments" role="list" aria-label="{{ 'footer.payment_methods' | t }}">
+            {%- for method in payment_methods -%}
+              {%- assign method = method | strip -%}
+              {%- if method != blank -%}
+                <li class="site-footer__payment">{{ method | escape }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div class="site-footer__row site-footer__bottom">
+        <p class="site-footer__copyright">
+          <span class="site-footer__desktop">{{ 'footer.copyright' | t }}</span>
+          © {{ 'now' | date: '%Y' }} {{ section.settings.brand_name | escape }}. {{ 'footer.rights' | t }}
+        </p>
+        <a class="site-footer__top" href="#top" aria-label="{{ 'footer.back_to_top' | t }}">
+          {% render 'icon', name: 'arrow-up', size: 18 %}
+        </a>
+      </div>
+    </div>
   </div>
 </footer>
 
 {% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
+  .site-footer__main {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px var(--space-4);
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--space-12) 20px 40px;
+    border-top: 1px solid var(--color-line);
   }
-  footer a {
+
+  .site-footer__newsletter {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .site-footer__column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .site-footer__heading {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--color-ink-muted);
+  }
+
+  .site-footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .site-footer__links a,
+  .site-footer__deep a {
     text-decoration: none;
-    color: var(--color-ink);
   }
-  footer .footer__links,
-  footer .footer__payment {
+
+  .site-footer__links a:hover,
+  .site-footer__links a[aria-current='page'] {
+    text-decoration: underline;
+    text-decoration-color: var(--color-sand);
+  }
+
+  .site-footer__desktop {
+    display: none;
+  }
+
+  .newsletter-form__field {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    height: 56px;
+    padding: 0 var(--space-1) 0 var(--space-4);
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface-raised);
+  }
+
+  .newsletter-form__field:focus-within {
+    box-shadow: var(--focus-ring);
+  }
+
+  .newsletter-form__input {
+    flex-grow: 1;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    color: var(--color-ink);
+    outline: none;
+  }
+
+  .newsletter-form__input:focus-visible {
+    box-shadow: none;
+  }
+
+  .newsletter-form__input::placeholder {
+    color: var(--color-ink-muted);
+    opacity: 1;
+  }
+
+  .newsletter-form__button {
+    height: var(--tap-target);
+    padding: 0 var(--space-3);
+    border: none;
+    background: transparent;
+    color: var(--color-ink);
+    font-size: var(--type-label-size);
+    font-weight: var(--type-label-weight);
+    letter-spacing: var(--type-label-tracking);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .newsletter-form__message {
+    margin-top: var(--space-3);
+    font-size: var(--type-caption-size);
+  }
+
+  .newsletter-form__message ul {
+    padding-left: var(--space-4);
+  }
+
+  .site-footer__deep-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--space-8) 20px var(--space-6);
+  }
+
+  .site-footer__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .site-footer__socials {
+    display: flex;
+    gap: var(--space-1);
+    margin-left: -10px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer__social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--tap-target);
+    height: var(--tap-target);
+  }
+
+  .site-footer__payments {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer__payment {
+    padding: 5px 10px;
+    border: 1px solid var(--color-line-deep-strong);
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: var(--type-label-weight);
+    letter-spacing: 0.08em;
+  }
+
+  .site-footer__bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-top: 20px;
+    border-top: 1px solid var(--color-line-deep);
+  }
+
+  .site-footer__copyright {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--color-on-deep-muted);
+  }
+
+  .site-footer .site-footer__top {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: var(--tap-target);
+    height: var(--tap-target);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-sand);
+    color: var(--color-deep);
+  }
+
+  .site-footer .site-footer__top:hover {
+    background-color: var(--color-accent-on-deep-hover);
+    color: var(--color-deep);
+  }
+
+  @media screen and (min-width: 750px) {
+    .site-footer__mobile {
+      display: none;
+    }
+
+    .site-footer__desktop {
+      display: revert;
+    }
+
+    span.site-footer__desktop {
+      display: inline;
+    }
+
+    .site-footer__main {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-6);
+      padding: var(--space-20) var(--page-margin) 64px;
+    }
+
+    .site-footer__newsletter {
+      grid-column: 3 / span 2;
+      grid-row: auto;
+      padding-left: 40px;
+    }
+
+    .site-footer__column {
+      gap: var(--space-6);
+    }
+
+    .site-footer__heading {
+      font-size: var(--type-label-size);
+    }
+
+    .site-footer__links {
+      gap: var(--space-3);
+      font-size: 17px;
+      line-height: var(--type-body-line-height);
+    }
+
+    .site-footer__newsletter p {
+      max-width: 520px;
+      font-size: 17px;
+    }
+
+    .newsletter-form {
+      max-width: 560px;
+    }
+
+    .newsletter-form__field {
+      height: 64px;
+      padding: 0 var(--space-2) 0 var(--space-6);
+    }
+
+    .newsletter-form__button {
+      padding: 0 var(--space-4);
+      font-size: var(--type-button-size);
+    }
+
+    .site-footer__deep-inner {
+      gap: var(--space-8);
+      padding: 40px var(--page-margin) var(--space-8);
+    }
+
+    .site-footer__row {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-footer__socials {
+      gap: var(--space-2);
+      margin-left: 0;
+    }
+
+    .site-footer__payments {
+      margin-left: auto;
+    }
+
+    .site-footer__payment {
+      padding: 6px var(--space-3);
+      font-size: var(--type-label-size);
+    }
+
+    .site-footer__bottom {
+      padding-top: var(--space-6);
+    }
+
+    .site-footer__copyright {
+      font-size: var(--type-caption-size);
+    }
+
+    .site-footer .site-footer__top {
+      width: 48px;
+      height: 48px;
+    }
   }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "t:general.footer",
+  "name": "Pied de page",
   "settings": [
     {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "type": "header",
+      "content": "Liens"
     },
     {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
-      "default": true
+      "type": "text",
+      "id": "heading_services",
+      "label": "Titre de la 1re colonne",
+      "default": "Services et contact"
+    },
+    {
+      "type": "text",
+      "id": "heading_services_mobile",
+      "label": "Titre de la 1re colonne (mobile)",
+      "default": "Services"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_services",
+      "label": "Menu de la 1re colonne"
+    },
+    {
+      "type": "text",
+      "id": "heading_legal",
+      "label": "Titre de la 2e colonne",
+      "default": "Informations légales"
+    },
+    {
+      "type": "text",
+      "id": "heading_legal_mobile",
+      "label": "Titre de la 2e colonne (mobile)",
+      "default": "Légal"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_legal",
+      "label": "Menu de la 2e colonne"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Titre",
+      "default": "Restons en contact"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Texte",
+      "default": "Recevez [XX] % de réduction sur votre premier achat, ainsi que nos nouveautés et offres exclusives tout au long de l'année."
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text_mobile",
+      "label": "Texte (mobile)",
+      "default": "Recevez [XX] % de réduction sur votre premier achat, ainsi que nos nouveautés et offres exclusives."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_success",
+      "label": "Message après inscription",
+      "default": "[Message de confirmation d'inscription]"
+    },
+    {
+      "type": "header",
+      "content": "Réseaux sociaux",
+      "info": "Une icône ne s'affiche que si son lien est renseigné."
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok"
+    },
+    {
+      "type": "url",
+      "id": "linkedin_url",
+      "label": "LinkedIn"
+    },
+    {
+      "type": "header",
+      "content": "Bas de page"
+    },
+    {
+      "type": "text",
+      "id": "payment_methods",
+      "label": "Moyens de paiement",
+      "info": "Séparés par des virgules.",
+      "default": "CB, Visa, Mastercard, Apple Pay, Google Pay, PayPal"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Nom affiché dans le copyright",
+      "default": "Frag Emirates"
     }
   ]
 }
