@@ -1,5 +1,5 @@
 // Crée les données de test dans la boutique de dev via l'API Admin (shopify store execute).
-// Usage : node _seed/seed.mjs <definitions|products|collections>
+// Usage : node _seed/seed.mjs <definitions|products|collections|navigation>
 // Relançable : les définitions/collections existantes sont ignorées, les produits sont mis à jour (identifiés par handle).
 
 import { spawnSync } from 'node:child_process';
@@ -7,7 +7,7 @@ import { mkdtempSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { STORE, API_VERSION, ONLINE_STORE_PUBLICATION, DEFINITIONS, PRODUCTS, COLLECTIONS } from './data.mjs';
+import { STORE, API_VERSION, ONLINE_STORE_PUBLICATION, DEFINITIONS, PRODUCTS, COLLECTIONS, PAGES, MENUS } from './data.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const IMAGES = join(ROOT, '_design', 'images');
@@ -141,7 +141,58 @@ async function collections() {
   }
 }
 
-const steps = { definitions, products, collections };
+async function navigation() {
+  const state = gql(`query {
+    pages(first: 100) { nodes { id handle } }
+    collections(first: 100) { nodes { id handle } }
+    menus(first: 50) { nodes { id handle } }
+  }`);
+  const pageIds = Object.fromEntries(state.pages.nodes.map((n) => [n.handle, n.id]));
+  const collectionIds = Object.fromEntries(state.collections.nodes.map((n) => [n.handle, n.id]));
+  const menuIds = Object.fromEntries(state.menus.nodes.map((n) => [n.handle, n.id]));
+
+  for (const p of PAGES) {
+    if (pageIds[p.handle]) { console.log(`= page ${p.title} existe déjà`); continue; }
+    const r = gql(`mutation CreatePage($page: PageCreateInput!) {
+      pageCreate(page: $page) {
+        page { id title handle }
+        userErrors { field message code }
+      }
+    }`, { page: { title: p.title, handle: p.handle, body: '<p>[Contenu à compléter]</p>', isPublished: true } });
+    check(`Page ${p.handle}`, r.pageCreate);
+    pageIds[p.handle] = r.pageCreate.page.id;
+    console.log(`+ page ${p.title}`);
+  }
+
+  for (const m of MENUS) {
+    const items = m.items.map((i) => i.collection
+      ? { title: i.title, type: 'COLLECTION', resourceId: collectionIds[i.collection] }
+      : { title: i.title, type: 'PAGE', resourceId: pageIds[i.page] });
+    if (items.some((i) => !i.resourceId)) throw new Error(`Menu ${m.handle} : cible introuvable`);
+
+    if (menuIds[m.handle]) {
+      const r = gql(`mutation UpdateMenu($id: ID!, $title: String!, $handle: String, $items: [MenuItemUpdateInput!]!) {
+        menuUpdate(id: $id, title: $title, handle: $handle, items: $items) {
+          menu { id handle items { title url } }
+          userErrors { field message code }
+        }
+      }`, { id: menuIds[m.handle], title: m.title, handle: m.handle, items });
+      check(`Menu ${m.handle}`, r.menuUpdate);
+      console.log(`~ menu ${m.title} : ${r.menuUpdate.menu.items.map((i) => `${i.title} → ${i.url}`).join(', ')}`);
+    } else {
+      const r = gql(`mutation CreateMenu($title: String!, $handle: String!, $items: [MenuItemCreateInput!]!) {
+        menuCreate(title: $title, handle: $handle, items: $items) {
+          menu { id handle items { title url } }
+          userErrors { field message code }
+        }
+      }`, { title: m.title, handle: m.handle, items });
+      check(`Menu ${m.handle}`, r.menuCreate);
+      console.log(`+ menu ${m.title} : ${r.menuCreate.menu.items.map((i) => `${i.title} → ${i.url}`).join(', ')}`);
+    }
+  }
+}
+
+const steps = { definitions, products, collections, navigation };
 const step = process.argv[2];
 if (!steps[step]) { console.error(`Usage : node _seed/seed.mjs <${Object.keys(steps).join('|')}>`); process.exit(1); }
 await steps[step]();

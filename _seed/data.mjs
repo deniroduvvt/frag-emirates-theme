@@ -45,6 +45,35 @@ export const PRODUCTS = [
     variants: [['100 ml', '79.00']] }
 ].map((p) => ({ ...p, description: DESCRIPTION }));
 
+// Pages liées depuis le pied de page (contenu à compléter). « contact » existe déjà dans la boutique.
+export const PAGES = [
+  { handle: 'commandes', title: 'Commandes' },
+  { handle: 'livraison-et-retours', title: 'Livraison et retours' },
+  { handle: 'faq', title: 'FAQ' },
+  { handle: 'mentions-legales', title: 'Mentions légales' },
+  { handle: 'politique-de-confidentialite', title: 'Politique de confidentialité' },
+  { handle: 'conditions-generales-de-vente', title: 'Conditions générales de vente' }
+];
+
+// Menus : { title, collection | page } ; main-menu est mis à jour, les autres sont créés.
+export const MENUS = [
+  { handle: 'main-menu', title: 'Menu principal', items: [
+    { title: 'Nos parfums', collection: 'nos-parfums' },
+    { title: 'Nous contacter', page: 'contact' }
+  ] },
+  { handle: 'services-et-contact', title: 'Services et contact', items: [
+    { title: 'Commandes', page: 'commandes' },
+    { title: 'Livraison et retours', page: 'livraison-et-retours' },
+    { title: 'Nous contacter', page: 'contact' },
+    { title: 'FAQ', page: 'faq' }
+  ] },
+  { handle: 'informations-legales', title: 'Informations légales', items: [
+    { title: 'Mentions légales', page: 'mentions-legales' },
+    { title: 'Politique de confidentialité', page: 'politique-de-confidentialite' },
+    { title: 'Conditions générales de vente', page: 'conditions-generales-de-vente' }
+  ] }
+];
+
 // rules : collection automatique ; products : collection manuelle (ordre = ordre d'affichage)
 export const COLLECTIONS = [
   { handle: 'nos-parfums', title: 'Nos parfums', rules: [{ column: 'TYPE', relation: 'EQUALS', condition: 'Parfum' }] },
