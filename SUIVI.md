@@ -3,7 +3,8 @@
 Fichier de reprise : où en est le projet, ce qui a été décidé, ce qu'il reste à faire.
 À lire au début d'une nouvelle conversation (avec `CLAUDE.md` et `_design/HANDOFF.md`).
 
-Dernière mise à jour : 4 octobre 2026 — dernier commit `045da79` (Page panier).
+Dernière mise à jour : 4 octobre 2026 — dernier commit de code `c2c5e50` (Recherche et pages secondaires).
+**Toutes les pages du thème sont intégrées.** Prochaine priorité : le contrôle mobile.
 
 ---
 
@@ -35,18 +36,22 @@ Avant chaque commit : `shopify theme check` (doit afficher « no offenses ») + 
 | Nos parfums (grille, filtres, tri, « Voir plus ») | `sections/main-collection.liquid`, `templates/collection.json` | `7c81ffc` |
 | Fiche parfum + « Vous aimerez aussi » | `sections/main-product.liquid`, `product-recommendations.liquid`, `templates/product.json` | `b8d0e3f` |
 | Nous contacter | `sections/main-contact.liquid`, `templates/page.contact.json` | `9266a9b`, `7d7f51a` |
-| Panier | `sections/main-cart.liquid`, `templates/cart.json` | `045da79` |
+| Panier (pas de maquette : construit avec le design system) | `sections/main-cart.liquid`, `templates/cart.json` | `045da79` |
+| Recherche (pas de maquette) | `sections/search.liquid`, `snippets/pagination.liquid` | `c2c5e50` |
+| 404, pages de contenu, mot de passe, blog, article, liste des collections (pas de maquette) | `sections/404.liquid`, `page.liquid`, `password.liquid`, `blog.liquid`, `article.liquid`, `collections.liquid`, `layout/password.liquid` | `c2c5e50` |
 
-Vérifié visuellement en **desktop** uniquement (impossible de réduire la fenêtre Chrome sous 1440 px) → **le mobile reste à contrôler** sur téléphone ou via F12 > mode mobile.
+Styles partagés dans `assets/critical.css` : boutons, fil d'Ariane, conteneur de page (`.page-container`), texte riche (`.rte`), pagination, grille produit (`.collection-grid`), champs de formulaire (`.contact-field*`), sélecteur de quantité.
+
+Rendu vérifié sur l'aperçu (HTML + captures **desktop**). Le **mobile n'a pas pu être contrôlé** (fenêtre Chrome bloquée à 1440 px, aperçu non intégrable dans un cadre) → à faire sur téléphone ou via F12 > mode mobile.
 
 ---
 
 ## 3. Reste à faire
 
-1. **Recherche** — `sections/search.liquid` (encore celle du Skeleton) : résultats en grille de cartes produit.
-2. **Pages secondaires** encore au style Skeleton : 404, page de contenu (`page.liquid`), mot de passe, blog/article, liste des collections.
-3. **Contrôle mobile** (390 px) de toutes les pages.
-4. Éventuellement : indicateurs (3 barres) du héro quand il y aura plusieurs visuels.
+1. **Contrôle mobile** (390 px) de toutes les pages, puis corrections éventuelles.
+2. Contrôle visuel desktop des pages sans maquette (recherche, 404, pages de contenu, mot de passe, blog) : seul le rendu HTML a été vérifié pour certaines.
+3. Éventuellement : indicateurs (3 barres) du héro quand il y aura plusieurs visuels.
+4. Avant mise en ligne : vrais produits / prix / contenus, pages légales, puis publication du thème **par l'utilisateur**.
 
 ---
 
@@ -93,13 +98,26 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
 - **Réseaux sociaux** : liens à saisir dans l'éditeur (section Pied de page) — icônes masquées tant qu'ils sont vides.
 - **Visuel du héro** : à choisir dans l'éditeur (placeholder affiché en attendant).
 - Familles olfactives de Vulcan Feu, Grecia, Royal Blend : non renseignées (ne pas inventer).
-- 2 définitions de métachamps de démo `test_data.*` : inutilisées, suppression proposée, en attente de réponse.
+- **Message de la page mot de passe** : Boutique en ligne > Préférences > Protection par mot de passe (affiché sous le titre).
+
+**Décisions en attente de réponse**
+- Supprimer les 2 définitions de métachamps de démo `test_data.*` (inutilisées) ?
+- Afficher ou non le lien Shopify « Vos choix en matière de confidentialité » dans « Informations légales » ?
+- Passer en « marques » les phrases du bandeau et du héro qui disent encore « maisons » (reporté par l'utilisateur) ?
 
 ---
 
-## 7. Placeholders à compléter (contenu)
+## 7. Placeholders et textes à valider
 
-Prix, concentrations, descriptions, pyramides, familles olfactives, `[Notes principales]`, délais de livraison/retour, seuil de livraison offerte, `[XX] %` newsletter, téléphone, e-mail, horaires (page Contact), messages de confirmation (newsletter, formulaire de contact), liste réelle des moyens de paiement, contenu des 6 pages légales/services.
+**Contenu à fournir** : prix, concentrations, descriptions, pyramides, familles olfactives, `[Notes principales]`, délais de livraison/retour, seuil de livraison offerte, `[XX] %` newsletter, téléphone, e-mail, horaires (page Contact), messages de confirmation (newsletter, formulaire de contact), liste réelle des moyens de paiement, contenu des 6 pages légales/services.
+
+**Textes d'interface ajoutés faute de maquette** (dans `locales/fr.default.json`, modifiables) :
+- Catalogue : « Aucun parfum ne correspond à ces critères. »
+- Fiche parfum : « Indisponible » (combinaison de contenance inexistante).
+- Panier : « Récapitulatif », « Sous-total », mentions TVA / livraison, « Votre panier est vide. », « Découvrir nos parfums », message d'erreur.
+- Recherche : « N résultat(s) pour « … » », « Aucun résultat pour « … ». », « Pages et articles ».
+- 404 : « Erreur 404 », « Page introuvable », « La page que vous cherchez n'existe pas ou a été déplacée. », « Découvrir nos parfums », « Retour à l'accueil ».
+- Mot de passe : « Cette boutique est privée », « Mot de passe », « Entrer ».
 
 ---
 
@@ -109,6 +127,8 @@ Prix, concentrations, descriptions, pyramides, familles olfactives, `[Notes prin
 - Après création/suppression de sections, si l'aperçu affiche des erreurs d'envoi : redémarrer `shopify theme dev` (resynchronisation complète).
 - Le filtre `structured_data` renvoie du JSON brut : toujours l'entourer de `<script type="application/ld+json">`.
 - Dans `{% render %}`, pas de filtre ni de comparaison dans les paramètres : passer par `{% assign %}` avant.
+- L'éditeur de fichiers crée parfois des `*.tmp` que `shopify theme dev` signale (« Failed to delete … .tmp ») : sans conséquence si les pages ne montrent pas l'écran « Upload Errors ».
+- Les captures Chrome peuvent se figer ou sortir zoomées : vérifier alors le rendu par `curl` avec le cookie du mot de passe (`POST /password` avec `form_type=storefront_password`).
 - La suppression de dossiers (`git rm`) est autorisée par une règle de permission ajoutée par l'utilisateur ; l'installation d'apps / validation d'autorisations dans l'admin doit être faite par l'utilisateur.
 
 ---
@@ -137,6 +157,10 @@ b8d0e3f Fiche parfum et « Vous aimerez aussi »
 7d7f51a Contact : introduction recentrée, formulaire plus compact
 758d820 Champs et boutons à 48 px, photo produit réglable (format, largeur)
 045da79 Page panier
+0a8e4c8 Ajout de SUIVI.md (état du projet pour reprendre la conversation)
+85aec41 SUIVI.md : sauvegarde GitHub
+c2c5e50 Recherche et pages secondaires
 ```
+(+ le commit de cette mise à jour de SUIVI.md)
 
 Commandes utiles : `git log --oneline` (liste), `git show <commit>` (détail d'une étape), `git diff <commit>~1 <commit>` (changements).
