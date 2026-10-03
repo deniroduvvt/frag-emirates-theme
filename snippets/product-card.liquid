@@ -8,6 +8,7 @@
   @param {boolean} [show_new_badge] - Affiche le badge « Nouveau »
   @param {number} [rank] - Affiche le rang (« N° 1 ») à la place du badge
   @param {string} [image_background] - 'sand' (défaut) ou 'raised'
+  @param {string} [heading_tag] - Balise du nom : 'h3' (défaut) ou 'h2' (page sans titre de section)
 
   @example
   {% render 'product-card', product: product, form_id: 'card-1', show_new_badge: true %}
@@ -66,9 +67,10 @@
       <span class="product-card__vendor">{{ product.vendor | escape }}</span>
     {%- endif -%}
 
-    <h3 class="product-card__title">
+    {%- assign heading_tag = heading_tag | default: 'h3' -%}
+    <{{ heading_tag }} class="product-card__title">
       <a href="{{ product.url }}">{{ product.title | escape }}</a>
-    </h3>
+    </{{ heading_tag }}>
 
     {%- if notes != blank -%}
       <p class="product-card__notes">{{ notes | escape }}</p>

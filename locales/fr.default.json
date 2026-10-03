@@ -31,7 +31,34 @@
     }
   },
   "collections": {
-    "title": "Collections"
+    "title": "Collections",
+    "breadcrumb": "Fil d'Ariane",
+    "home": "Accueil",
+    "filters": "Filtres",
+    "filter_by": "Filtrer par",
+    "close_filters": "Fermer les filtres",
+    "vendor": "Maison",
+    "price": "Prix",
+    "price_min": "Prix minimum",
+    "price_max": "Prix maximum",
+    "min": "Min",
+    "max": "Max",
+    "show_more": "Afficher plus",
+    "show_less": "Afficher moins",
+    "clear_all": "Tout effacer",
+    "see_results": "Voir les résultats",
+    "sort_by": "Trier par",
+    "sort_new": "Nouveautés",
+    "sort_best": "Meilleures ventes",
+    "sort_price_asc": "Prix : croissant",
+    "sort_price_desc": "Prix : décroissant",
+    "count": {
+      "one": "{{ count }} parfum",
+      "other": "{{ count }} parfums"
+    },
+    "seen": "Vous avez vu {{ seen }} parfums sur {{ total }}",
+    "load_more": "Voir plus de parfums",
+    "empty": "Aucun parfum ne correspond à ces critères."
   },
   "footer": {
     "email": "Adresse e-mail",
