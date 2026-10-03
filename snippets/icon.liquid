@@ -2,7 +2,7 @@
   Icônes au trait des maquettes, en currentColor. Décoratives (aria-hidden) :
   l'élément parent porte le libellé accessible.
 
-  @param {string} name - search | cart | menu | close | arrow-up | chevron-left | chevron-right | chevron-down | chevron-up | filters | bottle | instagram | youtube | tiktok | linkedin
+  @param {string} name - search | cart | menu | close | arrow-up | chevron-left | chevron-right | chevron-down | chevron-up | filters | truck | return | lock | bottle | instagram | youtube | tiktok | linkedin
   @param {number} [size] - Taille en pixels (24 par défaut)
 
   @example
@@ -30,6 +30,12 @@
     <svg width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"><path d="M6 15l6-6 6 6"/></svg>
   {%- when 'filters' -%}
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true" focusable="false"><path d="M1 4h12"/><circle cx="16" cy="4" r="2.5"/><path d="M21 12H9"/><circle cx="6" cy="12" r="2.5"/></svg>
+  {%- when 'truck' -%}
+    <svg width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 7h12v9H2z"/><path d="M14 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
+  {%- when 'return' -%}
+    <svg width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v4h4"/></svg>
+  {%- when 'lock' -%}
+    <svg width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="10" width="14" height="10" rx="1"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
   {%- when 'bottle' -%}
     <svg width="{{ size }}" height="{{ size | times: 15 | divided_by: 8 }}" viewBox="0 0 80 150" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><rect x="28" y="6" width="24" height="22" rx="1"/><rect x="34" y="28" width="12" height="8"/><rect x="10" y="36" width="60" height="104" rx="4"/><rect x="22" y="70" width="36" height="40"/></svg>
   {%- when 'instagram' -%}

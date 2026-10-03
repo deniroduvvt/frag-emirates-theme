@@ -1,0 +1,160 @@
+{%- liquid
+  assign heading_id = 'Heading-' | append: section.id
+  assign fallback = section.settings.fallback_collection
+  assign all_url = fallback.url | default: routes.all_products_collection_url
+-%}
+
+<section
+  class="product-recommendations full-width"
+  aria-labelledby="{{ heading_id }}"
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4&intent=related"
+>
+  {%- if recommendations.performed? -%}
+    {%- liquid
+      assign items = recommendations.products
+      assign count = recommendations.products_count
+    -%}
+    {%- capture cards -%}
+      {%- if count > 0 -%}
+        {%- for item in items limit: 4 -%}
+          {%- assign form_id = 'CardForm-' | append: section.id | append: '-' | append: item.id -%}
+          <li>{% render 'product-card', product: item, form_id: form_id, image_background: 'raised' %}</li>
+        {%- endfor -%}
+      {%- elsif fallback -%}
+        {%- assign shown = 0 -%}
+        {%- for item in fallback.products -%}
+          {%- if item.id == recommendations.intent_product.id or shown >= 4 -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- assign shown = shown | plus: 1 -%}
+          {%- assign form_id = 'CardForm-' | append: section.id | append: '-' | append: item.id -%}
+          <li>{% render 'product-card', product: item, form_id: form_id, image_background: 'raised' %}</li>
+        {%- endfor -%}
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {%- if cards != blank -%}
+      <div class="product-recommendations__inner">
+        <div class="product-recommendations__header">
+          <h2 class="product-recommendations__heading" id="{{ heading_id }}">{{ 'products.you_may_like' | t }}</h2>
+          <a class="product-recommendations__all" href="{{ all_url }}">
+            <span class="product-recommendations__desktop">{{ 'products.view_all' | t }}</span>
+            <span class="product-recommendations__mobile">{{ 'products.view_all_short' | t }}</span>
+          </a>
+        </div>
+        <ul class="product-recommendations__grid" role="list">
+          {{ cards }}
+        </ul>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .product-recommendations:has(.product-recommendations__inner) {
+    background-color: var(--color-surface-sand);
+  }
+
+  .product-recommendations__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: var(--space-12) 20px;
+  }
+
+  .product-recommendations__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .product-recommendations__heading {
+    font-size: 30px;
+  }
+
+  .product-recommendations__all {
+    padding: var(--space-3) 0;
+    font-size: var(--type-label-size);
+    font-weight: var(--type-button-weight);
+    letter-spacing: var(--type-button-tracking);
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-decoration-color: var(--color-ink);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+  }
+
+  .product-recommendations__desktop {
+    display: none;
+  }
+
+  .product-recommendations__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px var(--space-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .product-recommendations__inner {
+      gap: var(--space-12);
+      padding: var(--space-20) var(--page-margin);
+    }
+
+    .product-recommendations__heading {
+      font-size: var(--type-display-lg-size);
+    }
+
+    .product-recommendations__all {
+      font-size: var(--type-button-size);
+    }
+
+    .product-recommendations__desktop {
+      display: inline;
+    }
+
+    .product-recommendations__mobile {
+      display: none;
+    }
+
+    .product-recommendations__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-6);
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    document.querySelectorAll('.product-recommendations[data-url]').forEach(async (section) => {
+      if (section.querySelector('.product-recommendations__inner')) return;
+      try {
+        const response = await fetch(section.dataset.url);
+        if (!response.ok) return;
+        const html = new DOMParser().parseFromString(await response.text(), 'text/html');
+        const inner = html.querySelector('.product-recommendations__inner');
+        if (inner) section.append(inner);
+      } catch (error) {
+        /* Section facultative : rien à afficher en cas d'échec */
+      }
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Vous aimerez aussi",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "fallback_collection",
+      "label": "Collection de secours",
+      "info": "Utilisée tant que Shopify n'a pas de recommandation pour ce parfum, et pour le lien « Voir tous nos parfums »."
+    }
+  ]
+}
+{% endschema %}
