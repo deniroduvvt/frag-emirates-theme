@@ -3,8 +3,19 @@
 Fichier de reprise : où en est le projet, ce qui a été décidé, ce qu'il reste à faire.
 À lire au début d'une nouvelle conversation (avec `CLAUDE.md` et `_design/HANDOFF.md`).
 
-Dernière mise à jour : 6 octobre 2026 — contrôle mobile fait, correction du fil d'Ariane des pages de contenu.
-**Toutes les pages du thème sont intégrées et contrôlées en mobile (390 px).**
+Dernière mise à jour : 6 octobre 2026 (fin de session).
+**Toutes les pages du thème sont intégrées et contrôlées (mobile 390 px et desktop).** Le thème est terminé côté code ;
+la suite dépend surtout du **contenu** que l'utilisateur va réunir (produits, textes, pages légales). Il revient quand il a avancé.
+
+**Méthode de travail** : l'utilisateur modifie dans l'admin ou l'éditeur de thème, puis dit « j'ai modifié X » →
+Claude vérifie par l'API (`shopify store execute`), sur l'aperçu, et via `git status` pour l'éditeur
+(aperçu lancé avec `shopify theme dev --store frag-emirates.myshopify.com --theme-editor-sync`, dans le terminal de l'utilisateur).
+Taxes, paiements, checkout, apps : non visibles par Claude → capture d'écran dans le dossier.
+
+**Vulcan Feu (test de saisie de l'utilisateur, non urgent)** : notes de tête et de fond inversées dans les métachamps
+par rapport à sa description, Gingembre et Praliné manquants, « Feve » sans accent, `notes_principales` encore à la valeur
+de test, famille olfactive vide (la description dit « Floral »), description copiée d'un autre site (balises `<span>` résiduelles).
+Ne rien corriger sans accord.
 
 ---
 
@@ -102,7 +113,7 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
   3. vérifier que le checkout n'affiche aucune ligne « TVA ».
   La TVA payée à l'import (Dubaï, 20 % en douane) n'est pas récupérable en franchise : c'est un coût à intégrer aux prix. Cas de l'import à faire valider par un comptable.
   Impact thème (fait le 6 octobre) : sans TVA collectée, le panier affiche « Frais de livraison calculés lors du paiement. » (clé `cart.shipping_at_checkout`, choix de l'utilisateur, sans mention 293 B sur le site). « TVA incluse » réapparaît seule si la TVA est un jour collectée.
-- **Format du prix** « 49,00 € » : Paramètres > Général > Devise > Formatage → `{{amount_with_comma_separator}} €` (aujourd'hui « €49,00 »).
+- ~~Format du prix~~ : « 49,00 € », fait par l'utilisateur (6 octobre).
 - **Réseaux sociaux** : liens à saisir dans l'éditeur (section Pied de page) — icônes masquées tant qu'ils sont vides.
 - **Visuel du héro** : à choisir dans l'éditeur (placeholder affiché en attendant).
 - Familles olfactives de Vulcan Feu, Grecia, Royal Blend : non renseignées (ne pas inventer).
@@ -168,6 +179,12 @@ b8d0e3f Fiche parfum et « Vous aimerez aussi »
 0a8e4c8 Ajout de SUIVI.md (état du projet pour reprendre la conversation)
 85aec41 SUIVI.md : sauvegarde GitHub
 c2c5e50 Recherche et pages secondaires
+e3afff5 Contrôle mobile ; fil d'Ariane des pages de contenu corrigé
+7d1cb70 SUIVI.md : franchise en base de TVA (293 B), étapes de mise en ligne
+d8d789a Panier : mention livraison seule (franchise de TVA)
+6b56c99 Contrôle desktop des pages sans maquette ; titres d'onglet corrigés
+bd78d33 Page Qui sommes-nous dans le menu, « marques » partout, nettoyage boutique
+eb154dd En-tête à 3 liens sans retour à la ligne, panier desktop sur deux lignes
 ```
 (+ le commit de cette mise à jour de SUIVI.md)
 
