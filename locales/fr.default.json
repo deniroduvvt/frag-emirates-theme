@@ -122,8 +122,8 @@
     "menu": "Menu",
     "search": "Rechercher",
     "search_label": "Rechercher un parfum",
-    "search_placeholder": "Rechercher un parfum, une maison…",
-    "search_placeholder_short": "Parfum, maison…",
+    "search_placeholder": "Rechercher un parfum, une marque…",
+    "search_placeholder_short": "Parfum, marque…",
     "cart": "Panier",
     "cart_count": {
       "one": "Panier, {{ count }} article",
@@ -171,7 +171,7 @@
   },
   "search": {
     "title": "Recherche",
-    "placeholder": "Rechercher un parfum, une maison…",
+    "placeholder": "Rechercher un parfum, une marque…",
     "submit": "Rechercher",
     "no_results_html": "Aucun résultat pour « {{ terms }} ».",
     "results_for_html": {

@@ -50,8 +50,9 @@ export const PAGE_UPDATES = [
   { handle: 'contact', title: 'Nous contacter', templateSuffix: 'contact' }
 ];
 
-// Pages liées depuis le pied de page (contenu à compléter). « contact » existe déjà dans la boutique.
+// Pages liées depuis les menus (contenu à compléter). « contact » existe déjà dans la boutique.
 export const PAGES = [
+  { handle: 'qui-sommes-nous', title: 'Qui sommes-nous' },
   { handle: 'commandes', title: 'Commandes' },
   { handle: 'livraison-et-retours', title: 'Livraison et retours' },
   { handle: 'faq', title: 'FAQ' },
@@ -64,6 +65,7 @@ export const PAGES = [
 export const MENUS = [
   { handle: 'main-menu', title: 'Menu principal', items: [
     { title: 'Nos parfums', collection: 'nos-parfums' },
+    { title: 'Qui sommes-nous', page: 'qui-sommes-nous' },
     { title: 'Nous contacter', page: 'contact' }
   ] },
   { handle: 'services-et-contact', title: 'Services et contact', items: [

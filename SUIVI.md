@@ -64,7 +64,7 @@ Rendu vérifié sur l'aperçu (HTML + captures desktop). **Mobile contrôlé le 
 - **Champs et boutons à 48 px** (demande utilisateur ; minimum 44 px du design system respecté). Les hauteurs 52–64 px de la maquette ont été réduites.
 - **Contact** : introduction sur 960 px, préférence de recontact + sujet côte à côte, message de 140 px.
 - **Photo fiche parfum** : réglages « Format » (portrait 3:4 par défaut) et « Largeur » (460 px par défaut) dans l'éditeur de thème.
-- **« Marques »** au lieu de « Maison » pour le filtre et « Nos marques » sur l'accueil. Les phrases du bandeau et du héro qui disent « maisons » sont laissées telles quelles **pour l'instant** (à revoir plus tard).
+- **« Marques »** au lieu de « Maison » pour le filtre et « Nos marques » sur l'accueil ; depuis le 6 octobre, aussi dans le bandeau, le héro et le champ de recherche (« maisons » n'apparaît plus nulle part ; `maisons` reste l'identifiant interne de la section dans `templates/index.json`).
 - Textes d'interface en français (`locales/fr.default.json`), réglages de sections en français.
 - Pas de faux contenu : placeholders `[…]` conservés ; pas de vignettes vides dans la galerie produit.
 
@@ -84,9 +84,9 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
 - **Métachamps** `parfum.*` : `famille_olfactive` (liste, 8 valeurs), `notes_principales`, `concentration`, `notes_tete`, `notes_coeur`, `notes_fond`.
 - **Produits** : Vulcan Feu, Grecia, Royal Blend (French Avenue, avec photo) + [Nom du parfum 4 à 8]. Prix de **test**, à remplacer. Contenances = variantes (« 100 ml », et « [Contenance 2] » sur le n° 7).
 - **Collections** : Nos parfums (auto, type Parfum), Nouveautés, Meilleures ventes (manuelles), une par marque.
-- **Menus** : Menu principal (Nos parfums, Nous contacter), Services et contact, Informations légales. L'ancien « Footer menu » (lien « Vos choix en matière de confidentialité ») est conservé, non affiché — à décider avant mise en ligne.
-- **Pages** : Commandes, Livraison et retours, FAQ, Mentions légales, Politique de confidentialité, CGV (contenu `[Contenu à compléter]`), Nous contacter (modèle `contact`).
-- Produits de démo (snowboards) et collections de démo : **supprimés**.
+- **Menus** : Menu principal (Nos parfums, Qui sommes-nous, Nous contacter), Services et contact, Informations légales. L'ancien « Footer menu » (lien « Vos choix en matière de confidentialité ») est conservé, non affiché — à décider avant mise en ligne.
+- **Pages** : Qui sommes-nous (ajoutée le 6 octobre, modèle de page standard), Commandes, Livraison et retours, FAQ, Mentions légales, Politique de confidentialité, CGV (contenu `[Contenu à compléter]`), Nous contacter (modèle `contact`).
+- Produits de démo (snowboards) et collections de démo : **supprimés**. Le 6 octobre : blog « News » (vide) et métachamps de démo `test_data.*` (inutilisés) **supprimés** à la demande de l'utilisateur.
 - **Search & Discovery** installé : filtres Marque (Fournisseur), Famille olfactive (métachamp, correspondance OU), Prix, Disponibilité (masqué par le thème).
 - Devise : **EUR**. Langue principale : **français**.
 
@@ -104,14 +104,11 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
 - **Réseaux sociaux** : liens à saisir dans l'éditeur (section Pied de page) — icônes masquées tant qu'ils sont vides.
 - **Visuel du héro** : à choisir dans l'éditeur (placeholder affiché en attendant).
 - Familles olfactives de Vulcan Feu, Grecia, Royal Blend : non renseignées (ne pas inventer).
-- **Nom de la boutique** : Paramètres > Général > « frag-emirates » → « Frag Emirates » (apparaît dans les onglets du navigateur et les partages sur les réseaux).
+- ~~Nom de la boutique~~ : « Frag Emirates », fait par l'utilisateur (6 octobre).
 - **Message de la page mot de passe** : Boutique en ligne > Préférences > Protection par mot de passe (affiché sous le titre).
 
 **Décisions en attente de réponse**
-- Supprimer les 2 définitions de métachamps de démo `test_data.*` (inutilisées) ?
 - Afficher ou non le lien Shopify « Vos choix en matière de confidentialité » dans « Informations légales » ?
-- Blog « News » (créé par défaut par Shopify, vide, en anglais, lié nulle part) : le supprimer, le renommer, ou le garder pour plus tard ?
-- Passer en « marques » les phrases du bandeau et du héro qui disent encore « maisons » (reporté par l'utilisateur) ?
 
 ---
 
