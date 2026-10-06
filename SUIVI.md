@@ -3,8 +3,8 @@
 Fichier de reprise : où en est le projet, ce qui a été décidé, ce qu'il reste à faire.
 À lire au début d'une nouvelle conversation (avec `CLAUDE.md` et `_design/HANDOFF.md`).
 
-Dernière mise à jour : 4 octobre 2026 — dernier commit de code `c2c5e50` (Recherche et pages secondaires).
-**Toutes les pages du thème sont intégrées.** Prochaine priorité : le contrôle mobile.
+Dernière mise à jour : 6 octobre 2026 — contrôle mobile fait, correction du fil d'Ariane des pages de contenu.
+**Toutes les pages du thème sont intégrées et contrôlées en mobile (390 px).**
 
 ---
 
@@ -42,16 +42,17 @@ Avant chaque commit : `shopify theme check` (doit afficher « no offenses ») + 
 
 Styles partagés dans `assets/critical.css` : boutons, fil d'Ariane, conteneur de page (`.page-container`), texte riche (`.rte`), pagination, grille produit (`.collection-grid`), champs de formulaire (`.contact-field*`), sélecteur de quantité.
 
-Rendu vérifié sur l'aperçu (HTML + captures **desktop**). Le **mobile n'a pas pu être contrôlé** (fenêtre Chrome bloquée à 1440 px, aperçu non intégrable dans un cadre) → à faire sur téléphone ou via F12 > mode mobile.
+Rendu vérifié sur l'aperçu (HTML + captures desktop). **Mobile contrôlé le 6 octobre** (toutes les pages, menu burger, filtres, panier rempli) : aucun débordement horizontal, rendu conforme. Méthode : la fenêtre Chrome reste bloquée à 1440 px, donc le HTML de la page est chargé via `fetch` dans une `iframe srcdoc` de 390 px (avec `<base href>`) superposée à la page.
 
 ---
 
 ## 3. Reste à faire
 
-1. **Contrôle mobile** (390 px) de toutes les pages, puis corrections éventuelles.
+1. ~~Contrôle mobile~~ : fait (6 octobre).
 2. Contrôle visuel desktop des pages sans maquette (recherche, 404, pages de contenu, mot de passe, blog) : seul le rendu HTML a été vérifié pour certaines.
-3. Éventuellement : indicateurs (3 barres) du héro quand il y aura plusieurs visuels.
-4. Avant mise en ligne : vrais produits / prix / contenus, pages légales, puis publication du thème **par l'utilisateur**.
+3. Contrôle sur un vrai téléphone (gestes tactiles, clavier virtuel) — recommandé avant mise en ligne.
+4. Éventuellement : indicateurs (3 barres) du héro quand il y aura plusieurs visuels.
+5. Avant mise en ligne : vrais produits / prix / contenus, pages légales, puis publication du thème **par l'utilisateur**.
 
 ---
 
@@ -125,6 +126,7 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
 
 - **Ne pas modifier les fichiers du thème avec `sed -i`** pendant `shopify theme dev` : ses fichiers temporaires cassent l'aperçu (erreur 500 « Upload Errors ») → utiliser l'outil d'édition ; si ça arrive, redémarrer `shopify theme dev`.
 - Après création/suppression de sections, si l'aperçu affiche des erreurs d'envoi : redémarrer `shopify theme dev` (resynchronisation complète).
+- **Clé de traduction = nom de section** : une clé `sections.<nom>` (ex. `sections.page`) remplace toutes les traductions dans la section du même nom (le fil d'Ariane affichait « Page {{ number }} »). Ne pas créer de clé `sections.page`, `sections.header`, etc.
 - Le filtre `structured_data` renvoie du JSON brut : toujours l'entourer de `<script type="application/ld+json">`.
 - Dans `{% render %}`, pas de filtre ni de comparaison dans les paramètres : passer par `{% assign %}` avant.
 - L'éditeur de fichiers crée parfois des `*.tmp` que `shopify theme dev` signale (« Failed to delete … .tmp ») : sans conséquence si les pages ne montrent pas l'écran « Upload Errors ».

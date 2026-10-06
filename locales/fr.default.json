@@ -167,7 +167,7 @@
     "pagination": "Pagination",
     "previous_page": "Page précédente",
     "next_page": "Page suivante",
-    "page": "Page {{ number }}"
+    "page_number": "Page {{ number }}"
   },
   "search": {
     "title": "Recherche",
