@@ -94,7 +94,12 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
 
 ## 6. Réglages admin en attente (à faire par l'utilisateur)
 
-- **TVA incluse dans les prix** : Paramètres > Taxes et droits > « Tous les prix incluent les taxes » (sinon pas de mention « TVA incluse »).
+- **TVA : franchise en base (art. 293 B du CGI)** — décision du 6 octobre, remplace « TVA incluse dans les prix ». Le jour de la mise en ligne :
+  1. désactiver la collecte de TVA (Paramètres > Taxes et droits) : le prix affiché = prix final ;
+  2. ajouter la mention « TVA non applicable, art. 293 B du CGI » dans les CGV et sur les factures ;
+  3. vérifier que le checkout n'affiche aucune ligne « TVA ».
+  La TVA payée à l'import (Dubaï, 20 % en douane) n'est pas récupérable en franchise : c'est un coût à intégrer aux prix. Cas de l'import à faire valider par un comptable.
+  Impact thème : avec la collecte désactivée, le panier affiche « Taxes et frais de livraison calculés lors du paiement. » (clé `cart.taxes_excluded`), une phrase inexacte → texte à fixer (voir décisions en attente).
 - **Format du prix** « 49,00 € » : Paramètres > Général > Devise > Formatage → `{{amount_with_comma_separator}} €` (aujourd'hui « €49,00 »).
 - **Réseaux sociaux** : liens à saisir dans l'éditeur (section Pied de page) — icônes masquées tant qu'ils sont vides.
 - **Visuel du héro** : à choisir dans l'éditeur (placeholder affiché en attendant).
@@ -104,6 +109,7 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
 **Décisions en attente de réponse**
 - Supprimer les 2 définitions de métachamps de démo `test_data.*` (inutilisées) ?
 - Afficher ou non le lien Shopify « Vos choix en matière de confidentialité » dans « Informations légales » ?
+- Texte du panier en franchise de TVA (remplace « Taxes et frais de livraison calculés lors du paiement. ») ; afficher ou non « TVA non applicable, art. 293 B du CGI » sur le site (panier / fiche parfum) ?
 - Passer en « marques » les phrases du bandeau et du héro qui disent encore « maisons » (reporté par l'utilisateur) ?
 
 ---
