@@ -61,6 +61,8 @@ Rendu vérifié sur l'aperçu (HTML + captures desktop). **Mobile contrôlé le 
 - **Base du thème** : Skeleton **stable** (commit `a4f32d3` du dépôt Shopify/skeleton-theme, sections + templates JSON). La v2.0 « developer preview » (`{% block %}` / `{% partial %}`) a été abandonnée : erreur 500 sur cette boutique et non publiable.
 - **Polices** auto-hébergées dans `assets/` (Cormorant Garamond, Jost — licence OFL), pas de Google Fonts (RGPD, performance).
 - **Breakpoints** : 750 px (mobile / desktop), 990 px pour l'en-tête, la fiche parfum et le panier.
+- **En-tête desktop à 3 liens** (depuis l'ajout de « Qui sommes-nous ») : de 990 à 1279 px, espacements 32 px et liens en 12 px ; à partir de 1280 px, valeurs de la maquette (64 / 48 px, 13 px). Liens toujours sur une ligne, champ de recherche flexible (340 px max).
+- **Panier desktop sur deux lignes** (nom + prix, puis quantité + Supprimer) : la version sur une ligne écrasait le nom quand le prix était long.
 - **Champs et boutons à 48 px** (demande utilisateur ; minimum 44 px du design system respecté). Les hauteurs 52–64 px de la maquette ont été réduites.
 - **Contact** : introduction sur 960 px, préférence de recontact + sujet côte à côte, message de 140 px.
 - **Photo fiche parfum** : réglages « Format » (portrait 3:4 par défaut) et « Largeur » (460 px par défaut) dans l'éditeur de thème.
