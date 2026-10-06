@@ -49,7 +49,7 @@ Rendu vérifié sur l'aperçu (HTML + captures desktop). **Mobile contrôlé le 
 ## 3. Reste à faire
 
 1. ~~Contrôle mobile~~ : fait (6 octobre).
-2. Contrôle visuel desktop des pages sans maquette (recherche, 404, pages de contenu, mot de passe, blog) : seul le rendu HTML a été vérifié pour certaines.
+2. ~~Contrôle visuel desktop des pages sans maquette~~ : fait (6 octobre). Corrigé : titres d'onglet (page mot de passe vide, restes anglais « tagged » / « Page »).
 3. Contrôle sur un vrai téléphone (gestes tactiles, clavier virtuel) — recommandé avant mise en ligne.
 4. Éventuellement : indicateurs (3 barres) du héro quand il y aura plusieurs visuels.
 5. Avant mise en ligne : vrais produits / prix / contenus, pages légales, puis publication du thème **par l'utilisateur**.
@@ -104,11 +104,13 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
 - **Réseaux sociaux** : liens à saisir dans l'éditeur (section Pied de page) — icônes masquées tant qu'ils sont vides.
 - **Visuel du héro** : à choisir dans l'éditeur (placeholder affiché en attendant).
 - Familles olfactives de Vulcan Feu, Grecia, Royal Blend : non renseignées (ne pas inventer).
+- **Nom de la boutique** : Paramètres > Général > « frag-emirates » → « Frag Emirates » (apparaît dans les onglets du navigateur et les partages sur les réseaux).
 - **Message de la page mot de passe** : Boutique en ligne > Préférences > Protection par mot de passe (affiché sous le titre).
 
 **Décisions en attente de réponse**
 - Supprimer les 2 définitions de métachamps de démo `test_data.*` (inutilisées) ?
 - Afficher ou non le lien Shopify « Vos choix en matière de confidentialité » dans « Informations légales » ?
+- Blog « News » (créé par défaut par Shopify, vide, en anglais, lié nulle part) : le supprimer, le renommer, ou le garder pour plus tard ?
 - Passer en « marques » les phrases du bandeau et du héro qui disent encore « maisons » (reporté par l'utilisateur) ?
 
 ---
