@@ -99,7 +99,7 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
   2. ajouter la mention « TVA non applicable, art. 293 B du CGI » dans les CGV et sur les factures ;
   3. vérifier que le checkout n'affiche aucune ligne « TVA ».
   La TVA payée à l'import (Dubaï, 20 % en douane) n'est pas récupérable en franchise : c'est un coût à intégrer aux prix. Cas de l'import à faire valider par un comptable.
-  Impact thème : avec la collecte désactivée, le panier affiche « Taxes et frais de livraison calculés lors du paiement. » (clé `cart.taxes_excluded`), une phrase inexacte → texte à fixer (voir décisions en attente).
+  Impact thème (fait le 6 octobre) : sans TVA collectée, le panier affiche « Frais de livraison calculés lors du paiement. » (clé `cart.shipping_at_checkout`, choix de l'utilisateur, sans mention 293 B sur le site). « TVA incluse » réapparaît seule si la TVA est un jour collectée.
 - **Format du prix** « 49,00 € » : Paramètres > Général > Devise > Formatage → `{{amount_with_comma_separator}} €` (aujourd'hui « €49,00 »).
 - **Réseaux sociaux** : liens à saisir dans l'éditeur (section Pied de page) — icônes masquées tant qu'ils sont vides.
 - **Visuel du héro** : à choisir dans l'éditeur (placeholder affiché en attendant).
@@ -109,7 +109,6 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
 **Décisions en attente de réponse**
 - Supprimer les 2 définitions de métachamps de démo `test_data.*` (inutilisées) ?
 - Afficher ou non le lien Shopify « Vos choix en matière de confidentialité » dans « Informations légales » ?
-- Texte du panier en franchise de TVA (remplace « Taxes et frais de livraison calculés lors du paiement. ») ; afficher ou non « TVA non applicable, art. 293 B du CGI » sur le site (panier / fiche parfum) ?
 - Passer en « marques » les phrases du bandeau et du héro qui disent encore « maisons » (reporté par l'utilisateur) ?
 
 ---
@@ -121,7 +120,7 @@ node _seed/seed.mjs navigation    # 6 pages, 3 menus, page Contact (titre + mod�
 **Textes d'interface ajoutés faute de maquette** (dans `locales/fr.default.json`, modifiables) :
 - Catalogue : « Aucun parfum ne correspond à ces critères. »
 - Fiche parfum : « Indisponible » (combinaison de contenance inexistante).
-- Panier : « Récapitulatif », « Sous-total », mentions TVA / livraison, « Votre panier est vide. », « Découvrir nos parfums », message d'erreur.
+- Panier : « Récapitulatif », « Sous-total », « Frais de livraison calculés lors du paiement. », « Votre panier est vide. », « Découvrir nos parfums », message d'erreur.
 - Recherche : « N résultat(s) pour « … » », « Aucun résultat pour « … ». », « Pages et articles ».
 - 404 : « Erreur 404 », « Page introuvable », « La page que vous cherchez n'existe pas ou a été déplacée. », « Découvrir nos parfums », « Retour à l'accueil ».
 - Mot de passe : « Cette boutique est privée », « Mot de passe », « Entrer ».

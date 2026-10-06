@@ -30,7 +30,7 @@
     "summary": "Récapitulatif",
     "subtotal": "Sous-total",
     "taxes_included": "TVA incluse. Frais de livraison calculés lors du paiement.",
-    "taxes_excluded": "Taxes et frais de livraison calculés lors du paiement.",
+    "shipping_at_checkout": "Frais de livraison calculés lors du paiement.",
     "updating": "Mise à jour du panier…",
     "error": "Le panier n'a pas pu être mis à jour. Veuillez réessayer."
   },
